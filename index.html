@@ -199,12 +199,12 @@
       padding-left: 1.5rem; margin-top: 2.5rem;
     }
  
-    /* WHAT */
-    .section-what { background: var(--bg2); }
-    .what-intro { max-width: 600px; margin-bottom: 5rem; }
+    .section-what { background: var(--bg2); display: flex; flex-direction: column; align-items: center; }
+    .section-what .section-header { width: 100%; }
+    .what-intro { max-width: 600px; margin-bottom: 5rem; text-align: center; }
     .what-intro h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 1rem; }
     .what-intro p { font-size: 1.15rem; line-height: 1.8; color: var(--silver-mid); }
-    .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); }
+    .cards-grid { width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); }
     .card { background: var(--bg1); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background 0.3s ease; }
     .card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--silver-dim); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
     .card:hover { background: var(--bg3); }
@@ -231,10 +231,10 @@
     .value-body p { font-size: 1.05rem; line-height: 1.9; color: var(--silver-mid); }
  
     /* GAP */
-    .section-gap { background: var(--bg1); }
-    .section-gap .section-header { justify-content: center; }
+    .section-gap { background: var(--bg1); display: flex; flex-direction: column; align-items: center; }
+    .section-gap .section-header { width: 100%; justify-content: center; }
     .section-gap .section-line { display: none; }
-    .gap-list { display: flex; flex-direction: column; max-width: 900px; margin: 0 auto; }
+    .gap-list { display: flex; flex-direction: column; width: 100%; max-width: 900px; margin: 0 auto; }
     .gap-item { display: grid; grid-template-columns: 1fr 140px 1fr; align-items: center; gap: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--line); opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .gap-item:first-child { border-top: 1px solid var(--line); }
     .gap-item.visible { opacity: 1; transform: translateY(0); }
@@ -243,9 +243,11 @@
     .gap-us { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; font-weight: 400; color: var(--silver); }
  
     /* ── CHURCH GUIDE ── */
-    .section-guide { background: var(--bg2); }
+    .section-guide { background: var(--bg2); display: flex; flex-direction: column; align-items: center; }
+    .section-guide .section-header { width: 100%; justify-content: center; }
+    .section-guide .section-line { display: none; }
  
-    .guide-wrap { max-width: 860px; margin: 0 auto; }
+    .guide-wrap { width: 100%; max-width: 860px; margin: 0 auto; }
  
     .guide-steps {
       display: flex; align-items: center; justify-content: center;
