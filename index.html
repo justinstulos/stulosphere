@@ -192,7 +192,7 @@
       font-weight: 700; line-height: 1.15; color: var(--white); position: sticky; top: 8rem;
     }
     .problem-heading em { display: block; font-style: italic; color: var(--silver-mid); }
-    .problem-body p { font-size: 1rem; line-height: 1.95; color: var(--silver-mid); margin-bottom: 1.5rem; font-weight: 300; }
+    .problem-body p { font-size: 1.15rem; line-height: 1.95; color: var(--silver-mid); margin-bottom: 1.5rem; font-weight: 300; }
     .problem-body p:last-child {
       font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem;
       color: var(--silver); border-left: 2px solid var(--silver-dim);
@@ -203,7 +203,7 @@
     .section-what { background: var(--bg2); }
     .what-intro { max-width: 600px; margin-bottom: 5rem; }
     .what-intro h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 1rem; }
-    .what-intro p { font-size: 1rem; line-height: 1.8; color: var(--silver-mid); }
+    .what-intro p { font-size: 1.15rem; line-height: 1.8; color: var(--silver-mid); }
     .cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); }
     .card { background: var(--bg1); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background 0.3s ease; }
     .card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--silver-dim); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
@@ -211,7 +211,7 @@
     .card:hover::after { transform: scaleX(1); }
     .card-tag { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; color: var(--silver-dim); text-transform: uppercase; margin-bottom: 1.2rem; }
     .card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--white); line-height: 1.25; margin-bottom: 1rem; }
-    .card p { font-size: 0.88rem; line-height: 1.8; color: var(--silver-mid); }
+    .card p { font-size: 1rem; line-height: 1.8; color: var(--silver-mid); }
     .card.highlight { background: var(--bg3); border: 1px solid var(--line-bright); }
     .card.highlight .card-tag { color: var(--accent); }
     .card.highlight::after { background: var(--accent); }
@@ -221,40 +221,42 @@
     .values-layout { display: grid; grid-template-columns: 300px 1fr; gap: 6rem; }
     .values-sidebar { position: sticky; top: 8rem; align-self: start; }
     .values-sidebar h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 1.5rem; }
-    .values-sidebar p { font-size: 0.9rem; line-height: 1.8; color: var(--silver-mid); }
+    .values-sidebar p { font-size: 1.05rem; line-height: 1.8; color: var(--silver-mid); }
     .values-items { display: flex; flex-direction: column; }
     .value-row { display: grid; grid-template-columns: 60px 1fr; gap: 2rem; padding: 3rem 0; border-bottom: 1px solid var(--line); align-items: start; }
     .value-row:first-child { border-top: 1px solid var(--line); }
     .value-index { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--silver-dim); padding-top: 0.3rem; }
     .value-body h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
     .value-ref { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; color: var(--silver-dim); margin-bottom: 1rem; }
-    .value-body p { font-size: 0.92rem; line-height: 1.9; color: var(--silver-mid); }
+    .value-body p { font-size: 1.05rem; line-height: 1.9; color: var(--silver-mid); }
  
     /* GAP */
     .section-gap { background: var(--bg1); }
-    .gap-list { display: flex; flex-direction: column; max-width: 820px; margin: 0 auto; }
-    .gap-item { display: grid; grid-template-columns: 1fr 100px 1fr; align-items: center; gap: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--line); opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .section-gap .section-header { justify-content: center; }
+    .section-gap .section-line { display: none; }
+    .gap-list { display: flex; flex-direction: column; max-width: 900px; margin: 0 auto; }
+    .gap-item { display: grid; grid-template-columns: 1fr 140px 1fr; align-items: center; gap: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--line); opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .gap-item:first-child { border-top: 1px solid var(--line); }
     .gap-item.visible { opacity: 1; transform: translateY(0); }
-    .gap-them { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: var(--silver-mid); text-align: right; }
-    .gap-arrow { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--silver-dim); letter-spacing: 0.1em; white-space: nowrap; text-align: center; }
-    .gap-us { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; font-weight: 400; color: var(--silver); }
+    .gap-them { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; color: var(--silver-mid); text-align: right; }
+    .gap-arrow { font-family: 'DM Mono', monospace; font-size: 1.1rem; font-weight: 500; color: var(--accent); letter-spacing: 0.05em; white-space: nowrap; text-align: center; }
+    .gap-us { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; font-weight: 400; color: var(--silver); }
  
     /* ── CHURCH GUIDE ── */
     .section-guide { background: var(--bg2); }
  
-    .guide-wrap { max-width: 900px; }
+    .guide-wrap { max-width: 860px; margin: 0 auto; }
  
     .guide-steps {
-      display: flex; align-items: center; gap: 0;
-      margin-bottom: 4rem; flex-wrap: wrap; gap: 4px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 4rem; flex-wrap: wrap; gap: 6px;
     }
     .g-step {
       display: flex; align-items: center; gap: 10px;
-      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
       letter-spacing: 0.15em; text-transform: uppercase;
       color: var(--silver-dim); cursor: pointer;
-      padding: 8px 16px; border-radius: 2px;
+      padding: 10px 18px; border-radius: 2px;
       transition: color 0.2s ease, background 0.2s ease;
       border: 1px solid transparent;
     }
@@ -262,14 +264,14 @@
     .g-step.active { color: var(--white); border-color: var(--line-bright); background: var(--bg3); }
     .g-step.done { color: var(--accent); }
     .g-step-num {
-      width: 20px; height: 20px; border-radius: 50%;
+      width: 22px; height: 22px; border-radius: 50%;
       border: 1px solid var(--silver-dim);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.6rem; flex-shrink: 0;
+      font-size: 0.65rem; flex-shrink: 0;
     }
     .g-step.active .g-step-num { background: var(--white); color: var(--bg); border-color: var(--white); }
     .g-step.done .g-step-num { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-    .g-step-div { width: 24px; height: 1px; background: var(--line); flex-shrink: 0; }
+    .g-step-div { width: 28px; height: 1px; background: var(--line); flex-shrink: 0; }
  
     .g-panel { display: none; }
     .g-panel.active { display: block; }
@@ -277,19 +279,19 @@
     /* WHY CARDS */
     .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); margin-bottom: 1.5rem; }
     .why-card {
-      background: var(--bg1); padding: 2rem 1.75rem; cursor: pointer;
+      background: var(--bg1); padding: 2.25rem 2rem; cursor: pointer;
       transition: background 0.25s ease; position: relative;
     }
     .why-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
     .why-card:hover { background: var(--bg3); }
     .why-card.selected { background: var(--bg3); }
     .why-card.selected::after { transform: scaleX(1); }
-    .why-card-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--silver-dim); text-transform: uppercase; margin-bottom: 0.75rem; }
-    .why-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; line-height: 1.3; }
-    .why-card p { font-size: 0.85rem; color: var(--silver-mid); line-height: 1.7; }
+    .why-card-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; color: var(--silver-dim); text-transform: uppercase; margin-bottom: 0.75rem; }
+    .why-card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; line-height: 1.3; }
+    .why-card p { font-size: 1rem; color: var(--silver-mid); line-height: 1.7; }
     .why-expand {
       background: var(--bg3); border-left: 2px solid var(--accent);
-      padding: 1.5rem 2rem; font-size: 0.95rem; line-height: 1.85;
+      padding: 1.5rem 2rem; font-size: 1.05rem; line-height: 1.85;
       color: var(--silver); font-family: 'Playfair Display', serif;
       font-style: italic; display: none; margin-bottom: 1.5rem;
     }
@@ -298,27 +300,29 @@
     /* TRADITIONS */
     .trad-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 2rem; }
     .trad-tab {
-      font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em;
-      padding: 6px 14px; border: 1px solid var(--line); background: transparent;
+      font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em;
+      padding: 8px 16px; border: 1px solid var(--line); background: transparent;
       color: var(--silver-dim); cursor: pointer; text-transform: uppercase;
-      transition: all 0.2s ease; font-family: 'DM Mono', monospace;
+      transition: all 0.2s ease;
     }
     .trad-tab:hover { border-color: var(--line-bright); color: var(--silver); }
     .trad-tab.active { border-color: var(--accent); color: var(--white); background: var(--bg3); }
  
     .trad-card { background: var(--bg1); border: 1px solid var(--line); padding: 2.5rem; }
     .trad-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.25rem; gap: 1rem; }
-    .trad-name { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--white); }
+    .section-guide .section-header { justify-content: center; }
+    .section-guide .section-line { display: none; }
+    .trad-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--white); }
     .trad-badge {
       font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em;
       padding: 4px 10px; border: 1px solid var(--line-bright); color: var(--silver-mid);
       text-transform: uppercase; white-space: nowrap; margin-top: 0.4rem;
     }
-    .trad-desc { font-size: 0.95rem; line-height: 1.85; color: var(--silver-mid); margin-bottom: 2rem; }
+    .trad-desc { font-size: 1.05rem; line-height: 1.85; color: var(--silver-mid); margin-bottom: 2rem; }
     .trad-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); margin-bottom: 2rem; }
     .trad-fact { background: var(--bg2); padding: 1rem 1.25rem; }
     .trad-fact-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em; color: var(--silver-dim); text-transform: uppercase; margin-bottom: 0.35rem; }
-    .trad-fact-val { font-size: 0.88rem; color: var(--silver); font-weight: 400; line-height: 1.4; }
+    .trad-fact-val { font-size: 1rem; color: var(--silver); font-weight: 400; line-height: 1.4; }
     .trad-vibes { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
     .vibe { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; padding: 4px 10px; border: 1px solid var(--line); color: var(--silver-dim); text-transform: uppercase; }
     .trad-nav-btns { display: flex; justify-content: space-between; padding-top: 1.5rem; border-top: 1px solid var(--line); }
@@ -335,20 +339,20 @@
     .expect-trigger:hover { background: var(--bg3); }
     .expect-trigger-left { display: flex; align-items: center; gap: 1rem; }
     .expect-icon { display: none; }
-    .expect-title { font-size: 0.95rem; font-weight: 400; color: var(--white); }
+    .expect-title { font-size: 1.05rem; font-weight: 400; color: var(--white); }
     .expect-caret { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--silver-dim); transition: transform 0.25s ease; }
-    .expect-body { font-size: 0.9rem; line-height: 1.85; color: var(--silver-mid); padding: 0 1.75rem 1.5rem 1.75rem; display: none; }
+    .expect-body { font-size: 1.05rem; line-height: 1.85; color: var(--silver-mid); padding: 0 1.75rem 1.5rem 1.75rem; display: none; }
     .expect-item.open .expect-caret { transform: rotate(180deg); }
     .expect-item.open .expect-body { display: block; }
  
     /* FIND / QUIZ */
-    .quiz-intro { font-size: 0.95rem; color: var(--silver-mid); line-height: 1.8; margin-bottom: 2.5rem; max-width: 600px; }
+    .quiz-intro { font-size: 1.1rem; color: var(--silver-mid); line-height: 1.8; margin-bottom: 2.5rem; max-width: 600px; }
     .quiz-questions { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 2.5rem; }
-    .q-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--silver-mid); margin-bottom: 0.75rem; }
-    .q-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+    .q-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--silver-mid); margin-bottom: 0.75rem; }
+    .q-opts { display: flex; flex-wrap: wrap; gap: 8px; }
     .q-opt {
-      font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
-      padding: 7px 16px; border: 1px solid var(--line); background: transparent;
+      font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em;
+      padding: 10px 20px; border: 1px solid var(--line); background: transparent;
       color: var(--silver-dim); cursor: pointer; text-transform: uppercase;
       transition: all 0.2s ease;
     }
@@ -360,11 +364,11 @@
     .match-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--silver-dim); margin-bottom: 1rem; }
     .match-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
     .match-pill { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; padding: 5px 12px; border: 1px solid var(--accent); color: var(--accent); text-transform: uppercase; }
-    .match-text { font-size: 0.92rem; line-height: 1.8; color: var(--silver); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; font-style: italic; }
+    .match-text { font-size: 1.05rem; line-height: 1.8; color: var(--silver); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; font-style: italic; }
     .match-actions { display: flex; gap: 10px; flex-wrap: wrap; }
     .match-btn {
-      font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em;
-      padding: 9px 20px; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease;
+      font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em;
+      padding: 11px 24px; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease;
       border: 1px solid var(--silver); color: var(--bg); background: var(--silver);
     }
     .match-btn:hover { background: var(--white); border-color: var(--white); }
@@ -374,8 +378,8 @@
     /* GUIDE NAV */
     .g-nav { display: flex; justify-content: flex-end; gap: 8px; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); }
     .g-nav-btn {
-      font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em;
-      padding: 9px 20px; border: 1px solid var(--line); background: transparent;
+      font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em;
+      padding: 11px 24px; border: 1px solid var(--line); background: transparent;
       color: var(--silver-mid); cursor: pointer; text-transform: uppercase; transition: all 0.2s ease;
     }
     .g-nav-btn:hover { border-color: var(--line-bright); color: var(--silver); }
