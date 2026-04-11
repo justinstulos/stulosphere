@@ -318,7 +318,7 @@
     .trad-badge {
       font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em;
       padding: 4px 10px; border: 1px solid var(--line-bright); color: var(--silver-mid);
-      text-transform: uppercase; white-space: nowrap; margin-top: 0.4rem;
+      text-transform: uppercase; margin-top: 0.4rem;
     }
     .trad-desc { font-size: 1.05rem; line-height: 1.85; color: var(--silver-mid); margin-bottom: 2rem; }
     .trad-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); margin-bottom: 2rem; }
@@ -443,31 +443,35 @@
       /* --- Hero: fully centered, breathing room --- */
       .hero {
         min-height: 100svh;
-        padding: 0 1.5rem;
+        padding: 0 1.25rem;
         padding-top: 5rem;
         align-items: center;
         justify-content: center;
         text-align: center;
+        overflow: hidden;
       }
       .hero-rule { display: none; }
-      .hero-inner { padding-left: 0; max-width: 100%; }
+      .hero-inner { padding-left: 0; max-width: 100%; width: 100%; }
       .hero-eyebrow {
         justify-content: center;
         font-size: 0.6rem;
-        letter-spacing: 0.25em;
+        letter-spacing: 0.2em;
         margin-bottom: 1.5rem;
       }
       .hero-eyebrow::before { display: none; }
       h1 {
-        font-size: clamp(3.5rem, 18vw, 5.5rem);
-        line-height: 0.88;
+        font-size: clamp(2.8rem, 14vw, 5rem);
+        line-height: 0.92;
         letter-spacing: -0.02em;
+        word-break: break-word;
+        overflow-wrap: break-word;
       }
       .hero-sub {
-        font-size: clamp(1rem, 4vw, 1.15rem);
-        max-width: 340px;
+        font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+        max-width: 100%;
         margin: 1.75rem auto 2.5rem;
         line-height: 1.7;
+        padding: 0 0.25rem;
       }
       .hero-cta-row {
         flex-direction: column;
@@ -542,7 +546,7 @@
  
       /* --- Find a Church: redesigned for mobile --- */
       .section-guide { padding: 4.5rem 1.25rem; align-items: stretch; }
-      .guide-wrap { width: 100%; }
+      .guide-wrap { width: 100%; overflow: hidden; }
  
       /* Step nav: pill row, scrollable */
       .guide-steps {
@@ -594,10 +598,10 @@
         letter-spacing: 0.08em;
         border-radius: 2px;
       }
-      .trad-card { padding: 1.5rem 1.25rem; border-radius: 4px; }
-      .trad-header { flex-direction: column; gap: 0.6rem; align-items: flex-start; }
-      .trad-name { font-size: 1.6rem; }
-      .trad-badge { font-size: 0.58rem; margin-top: 0; }
+      .trad-card { padding: 1.5rem 1.25rem; border-radius: 4px; overflow: hidden; }
+      .trad-header { flex-direction: column; gap: 0.5rem; align-items: flex-start; margin-bottom: 1rem; }
+      .trad-name { font-size: 1.5rem; line-height: 1.2; word-break: break-word; }
+      .trad-badge { font-size: 0.56rem; margin-top: 0; white-space: normal; word-break: break-word; max-width: 100%; }
       .trad-desc { font-size: 0.95rem; line-height: 1.75; margin-bottom: 1.5rem; }
       .trad-facts { grid-template-columns: 1fr; gap: 1px; }
       .trad-fact { padding: 0.85rem 1rem; }
@@ -665,8 +669,8 @@
     /* ── SMALL PHONES (≤390px) ── */
     @media (max-width: 390px) {
       .section { padding: 4rem 1rem; }
-      h1 { font-size: clamp(3rem, 20vw, 4.5rem); }
-      .hero-sub { font-size: 0.95rem; }
+      h1 { font-size: clamp(2.5rem, 15vw, 3.5rem); }
+      .hero-sub { font-size: 0.9rem; }
       .trad-tabs { grid-template-columns: 1fr; }
       .trad-tab { padding: 11px 12px; }
       .g-step { font-size: 0.55rem; padding: 7px 11px; }
