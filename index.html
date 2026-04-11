@@ -33,7 +33,7 @@
       overflow-x: hidden;
       cursor: none;
     }
- 
+
     /* CURSOR */
     .cursor {
       position: fixed; width: 8px; height: 8px;
@@ -49,14 +49,14 @@
       transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), width 0.3s ease, height 0.3s ease;
       transform: translate(-50%, -50%);
     }
- 
+
     /* GRAIN */
     body::after {
       content: ''; position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       opacity: 0.04; pointer-events: none; z-index: 9000;
     }
- 
+
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -88,7 +88,7 @@
       font-family: 'Playfair Display', serif; font-style: italic;
       font-size: 0.9rem; color: var(--silver-dim);
     }
- 
+
     /* HERO */
     .hero {
       min-height: 100svh;
@@ -176,14 +176,14 @@
       font-family: 'DM Mono', monospace; font-size: 0.65rem;
       letter-spacing: 0.2em; color: var(--silver-dim); text-transform: uppercase;
     }
- 
+
     /* SECTIONS */
     .section { position: relative; padding: 9rem 3.5rem; border-top: 1px solid var(--line); }
     .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 5rem; }
     .section-num { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--silver-dim); letter-spacing: 0.15em; }
     .section-title { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.25em; color: var(--silver-mid); text-transform: uppercase; }
     .section-line { flex: 1; height: 1px; background: var(--line); }
- 
+
     /* OPPORTUNITY */
     .section-problem { background: var(--bg1); }
     .problem-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: start; }
@@ -198,7 +198,7 @@
       color: var(--silver); border-left: 2px solid var(--silver-dim);
       padding-left: 1.5rem; margin-top: 2.5rem;
     }
- 
+
     .section-what { background: var(--bg2); display: flex; flex-direction: column; align-items: center; }
     .section-what .section-header { width: 100%; }
     .what-intro { max-width: 600px; margin-bottom: 5rem; text-align: center; }
@@ -215,7 +215,7 @@
     .card.highlight { background: var(--bg3); border: 1px solid var(--line-bright); }
     .card.highlight .card-tag { color: var(--accent); }
     .card.highlight::after { background: var(--accent); }
- 
+
     /* VALUES */
     .section-values { background: var(--bg); }
     .values-layout { display: grid; grid-template-columns: 300px 1fr; gap: 6rem; }
@@ -229,7 +229,7 @@
     .value-body h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
     .value-ref { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; color: var(--silver-dim); margin-bottom: 1rem; }
     .value-body p { font-size: 1.05rem; line-height: 1.9; color: var(--silver-mid); }
- 
+
     /* GAP */
     .section-gap { background: var(--bg1); display: flex; flex-direction: column; align-items: center; }
     .section-gap .section-header { width: 100%; justify-content: center; }
@@ -241,14 +241,14 @@
     .gap-them { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; color: var(--silver-mid); text-align: right; }
     .gap-arrow { font-family: 'DM Mono', monospace; font-size: 1.1rem; font-weight: 500; color: var(--accent); letter-spacing: 0.05em; white-space: nowrap; text-align: center; }
     .gap-us { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; font-weight: 400; color: var(--silver); }
- 
+
     /* ── CHURCH GUIDE ── */
     .section-guide { background: var(--bg2); display: flex; flex-direction: column; align-items: center; }
     .section-guide .section-header { width: 100%; justify-content: center; }
     .section-guide .section-line { display: none; }
- 
+
     .guide-wrap { width: 100%; max-width: 860px; margin: 0 auto; }
- 
+
     .guide-steps {
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 4rem; flex-wrap: wrap; gap: 6px;
@@ -274,10 +274,10 @@
     .g-step.active .g-step-num { background: var(--white); color: var(--bg); border-color: var(--white); }
     .g-step.done .g-step-num { background: var(--accent); color: var(--bg); border-color: var(--accent); }
     .g-step-div { width: 28px; height: 1px; background: var(--line); flex-shrink: 0; }
- 
+
     .g-panel { display: none; }
     .g-panel.active { display: block; }
- 
+
     /* WHY CARDS */
     .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); margin-bottom: 1.5rem; }
     .why-card {
@@ -298,7 +298,7 @@
       font-style: italic; display: none; margin-bottom: 1.5rem;
     }
     .why-expand.show { display: block; }
- 
+
     /* TRADITIONS */
     .trad-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 2rem; }
     .trad-tab {
@@ -309,7 +309,7 @@
     }
     .trad-tab:hover { border-color: var(--line-bright); color: var(--silver); }
     .trad-tab.active { border-color: var(--accent); color: var(--white); background: var(--bg3); }
- 
+
     .trad-card { background: var(--bg1); border: 1px solid var(--line); padding: 2.5rem; }
     .trad-header { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; margin-bottom: 1.25rem; }
     .section-guide .section-header { justify-content: center; }
@@ -330,7 +330,7 @@
     .trad-nav-btns { display: flex; justify-content: space-between; padding-top: 1.5rem; border-top: 1px solid var(--line); }
     .trad-nav-btn { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; color: var(--silver-dim); background: none; border: 1px solid transparent; padding: 6px 14px; cursor: pointer; text-transform: uppercase; transition: all 0.2s ease; }
     .trad-nav-btn:hover { border-color: var(--line); color: var(--silver); }
- 
+
     /* EXPECT */
     .expect-items { display: flex; flex-direction: column; gap: 1px; background: var(--line); }
     .expect-item { background: var(--bg1); overflow: hidden; }
@@ -346,7 +346,7 @@
     .expect-body { font-size: 1.05rem; line-height: 1.85; color: var(--silver-mid); padding: 0 1.75rem 1.5rem 1.75rem; display: none; }
     .expect-item.open .expect-caret { transform: rotate(180deg); }
     .expect-item.open .expect-body { display: block; }
- 
+
     /* FIND / QUIZ */
     .quiz-intro { font-size: 1.1rem; color: var(--silver-mid); line-height: 1.8; margin-bottom: 2.5rem; max-width: 600px; }
     .quiz-questions { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 2.5rem; }
@@ -360,7 +360,7 @@
     }
     .q-opt:hover { border-color: var(--line-bright); color: var(--silver); }
     .q-opt.selected { border-color: var(--accent); color: var(--white); background: var(--bg3); }
- 
+
     .match-box { background: var(--bg3); border: 1px solid var(--line-bright); padding: 2rem 2.5rem; display: none; }
     .match-box.show { display: block; }
     .match-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--silver-dim); margin-bottom: 1rem; }
@@ -376,7 +376,7 @@
     .match-btn:hover { background: var(--white); border-color: var(--white); }
     .match-btn.secondary { background: transparent; color: var(--silver-mid); border-color: var(--line); }
     .match-btn.secondary:hover { border-color: var(--line-bright); color: var(--silver); }
- 
+
     /* GUIDE NAV */
     .g-nav { display: flex; justify-content: flex-end; gap: 8px; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); }
     .g-nav-btn {
@@ -387,7 +387,7 @@
     .g-nav-btn:hover { border-color: var(--line-bright); color: var(--silver); }
     .g-nav-btn.primary { background: var(--white); color: var(--bg); border-color: var(--white); }
     .g-nav-btn.primary:hover { background: var(--silver); border-color: var(--silver); }
- 
+
     /* ANCHOR */
     .section-anchor {
       padding: 12rem 3.5rem; text-align: center; position: relative; overflow: hidden;
@@ -398,19 +398,19 @@
     .anchor-quote { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 3rem); font-weight: 400; font-style: italic; color: var(--white); line-height: 1.5; max-width: 820px; margin: 0 auto 1.5rem; position: relative; z-index: 2; }
     .anchor-quote strong { font-style: normal; font-weight: 700; }
     .anchor-cite { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.25em; color: var(--silver-dim); position: relative; z-index: 2; }
- 
+
     /* FOOTER */
     footer { background: var(--bg); border-top: 1px solid var(--line); padding: 3rem 3.5rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
     .footer-logo { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.22em; color: var(--silver-mid); text-transform: uppercase; }
     .footer-center { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.9rem; color: var(--silver-dim); text-align: center; }
     .footer-right { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--silver-dim); text-align: right; }
- 
+
     /* ANIMATIONS */
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
     @keyframes slideRight { from{opacity:0;transform:translateX(-24px)} to{opacity:1;transform:translateX(0)} }
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
- 
+
     /* ── TABLET ── */
     @media (max-width: 1024px) {
       .problem-layout { grid-template-columns: 1fr; gap: 3rem; }
@@ -421,14 +421,14 @@
       .trad-facts { grid-template-columns: 1fr 1fr; }
       .gap-item { grid-template-columns: 1fr 110px 1fr; }
     }
- 
+
     /* ── MOBILE ── */
     @media (max-width: 768px) {
- 
+
       /* --- Base --- */
       body { cursor: auto; }
       .cursor, .cursor-ring { display: none; }
- 
+
       /* --- Nav --- */
       nav {
         padding: 1.1rem 1.25rem;
@@ -439,7 +439,7 @@
       .nav-links { display: none; }
       .nav-greek { display: none; }
       .nav-logo { font-size: 0.75rem; letter-spacing: 0.18em; }
- 
+
       /* --- Hero: fully centered, breathing room --- */
       .hero {
         min-height: 100svh;
@@ -489,13 +489,13 @@
       }
       .hero-verse { font-size: 0.62rem; letter-spacing: 0.1em; }
       .hero-scroll { display: none; }
- 
+
       /* --- Sections --- */
       .section { padding: 4.5rem 1.25rem; }
       .section-header { gap: 0.75rem; margin-bottom: 3rem; }
       .section-num { font-size: 0.62rem; }
       .section-title { font-size: 0.62rem; letter-spacing: 0.2em; }
- 
+
       /* --- Opportunity --- */
       .problem-layout { grid-template-columns: 1fr; gap: 2rem; }
       .problem-heading {
@@ -504,7 +504,7 @@
         text-align: center;
       }
       .problem-body p { font-size: 1rem; line-height: 1.85; }
- 
+
       /* --- What We Are --- */
       .section-what { padding: 4.5rem 1.25rem; align-items: stretch; }
       .section-what .section-header { width: 100%; }
@@ -515,7 +515,7 @@
       .card { padding: 1.75rem 1.25rem; }
       .card h3 { font-size: 1.15rem; }
       .card p { font-size: 0.95rem; }
- 
+
       /* --- Values --- */
       .values-layout { grid-template-columns: 1fr; gap: 2rem; }
       .values-sidebar { position: static; text-align: center; }
@@ -525,7 +525,7 @@
       .value-index { font-size: 0.6rem; }
       .value-body h3 { font-size: 1.15rem; }
       .value-body p { font-size: 0.95rem; }
- 
+
       /* --- What We Do --- */
       .section-gap { padding: 4.5rem 1.25rem; align-items: center; }
       .gap-list { width: 100%; max-width: 100%; }
@@ -545,11 +545,11 @@
         margin: 0.2rem 0;
       }
       .gap-us { font-size: 1rem; text-align: center; color: var(--white); }
- 
+
       /* --- Find a Church: redesigned for mobile --- */
       .section-guide { padding: 4.5rem 1.25rem; align-items: stretch; }
       .guide-wrap { width: 100%; overflow: hidden; }
- 
+
       /* Step nav: pill row, scrollable */
       .guide-steps {
         display: flex;
@@ -577,7 +577,7 @@
       .g-step.active { border-color: var(--accent); background: rgba(184,198,220,0.1); }
       .g-step-num { width: 18px; height: 18px; font-size: 0.55rem; }
       .g-step-div { width: 12px; flex-shrink: 0; }
- 
+
       /* Why cards: single column, tappable */
       .why-grid { grid-template-columns: 1fr; gap: 1px; }
       .why-card { padding: 1.5rem 1.25rem; }
@@ -585,7 +585,7 @@
       .why-card h3 { font-size: 1.1rem; }
       .why-card p { font-size: 0.92rem; }
       .why-expand { font-size: 0.95rem; padding: 1.25rem; line-height: 1.75; }
- 
+
       /* Traditions: dropdown-style selector on mobile */
       .trad-tabs {
         display: grid;
@@ -618,13 +618,13 @@
         padding-top: 1.25rem;
       }
       .trad-nav-btn { text-align: center; padding: 12px 8px; font-size: 0.6rem; }
- 
+
       /* What to Expect: larger tap targets */
       .expect-trigger { padding: 1.1rem 1.25rem; min-height: 56px; }
       .expect-title { font-size: 0.95rem; }
       .expect-caret { font-size: 0.65rem; }
       .expect-body { font-size: 0.95rem; padding: 0 1.25rem 1.25rem; line-height: 1.8; }
- 
+
       /* Quiz: full-width buttons */
       .quiz-intro { font-size: 0.95rem; line-height: 1.75; }
       .quiz-questions { gap: 1.75rem; }
@@ -645,16 +645,16 @@
       .match-text { font-size: 0.95rem; line-height: 1.75; margin-bottom: 1.25rem; }
       .match-actions { flex-direction: column; gap: 8px; }
       .match-btn { text-align: center; padding: 13px 16px; font-size: 0.68rem; }
- 
+
       /* Guide nav buttons */
       .g-nav { justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; }
       .g-nav-btn { font-size: 0.65rem; padding: 12px 18px; }
- 
+
       /* Anchor */
       .section-anchor { padding: 7rem 1.5rem; }
       .anchor-quote { font-size: clamp(1.3rem, 5.5vw, 1.8rem); line-height: 1.55; }
       .anchor-cite { font-size: 0.65rem; letter-spacing: 0.2em; }
- 
+
       /* Footer */
       footer {
         grid-template-columns: 1fr;
@@ -666,7 +666,7 @@
       .footer-center { font-size: 0.85rem; }
       .footer-right { text-align: center; font-size: 0.6rem; }
     }
- 
+
     /* ── SMALL PHONES (≤390px) ── */
     @media (max-width: 390px) {
       .section { padding: 4rem 1rem; }
@@ -679,10 +679,10 @@
   </style>
 </head>
 <body>
- 
+
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
- 
+
   <!-- NAV -->
   <nav id="nav">
     <a class="nav-logo" href="#hero">Stulosphere</a>
@@ -693,7 +693,7 @@
     </div>
     <div class="nav-greek">στῦλος</div>
   </nav>
- 
+
   <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-grid"></div>
@@ -716,7 +716,7 @@
       <span class="scroll-label">Scroll</span>
     </div>
   </section>
- 
+
   <!-- OPPORTUNITY -->
   <section class="section section-problem" id="opportunity">
     <div class="section-header reveal">
@@ -736,7 +736,7 @@
       </div>
     </div>
   </section>
- 
+
   <!-- WHAT WE ARE -->
   <section class="section section-what" id="what">
     <div class="section-header reveal">
@@ -771,7 +771,7 @@
       </div>
     </div>
   </section>
- 
+
   <!-- VALUES -->
   <section class="section section-values" id="values">
     <div class="section-header reveal">
@@ -812,7 +812,7 @@
       </div>
     </div>
   </section>
- 
+
   <!-- WHAT WE DO -->
   <section class="section section-gap" id="gap">
     <div class="section-header reveal">
@@ -827,7 +827,7 @@
       <div class="gap-item"><div class="gap-them">The hungry</div><div class="gap-arrow">&#x2192;</div><div class="gap-us">Find truth proclaimed, celebrated, and lived</div></div>
     </div>
   </section>
- 
+
   <!-- CHURCH GUIDE -->
   <section class="section section-guide" id="guide">
     <div class="section-header reveal">
@@ -836,7 +836,7 @@
       <div class="section-line"></div>
     </div>
     <div class="guide-wrap reveal">
- 
+
       <!-- Step bar -->
       <div class="guide-steps">
         <div class="g-step active" data-step="0" onclick="gStep(0)"><div class="g-step-num">1</div>Why church</div>
@@ -847,7 +847,7 @@
         <div class="g-step-div"></div>
         <div class="g-step" data-step="3" onclick="gStep(3)"><div class="g-step-num">4</div>Find yours</div>
       </div>
- 
+
       <!-- Panel 1: Why Church -->
       <div class="g-panel active" id="gp-0">
         <div class="why-grid">
@@ -877,7 +877,7 @@
           <button class="g-nav-btn primary" onclick="gStep(1)">Explore traditions &#x2192;</button>
         </div>
       </div>
- 
+
       <!-- Panel 2: Traditions -->
       <div class="g-panel" id="gp-1">
         <div class="trad-tabs" id="trad-tabs"></div>
@@ -887,7 +887,7 @@
           <button class="g-nav-btn primary" onclick="gStep(2)">What to expect &#x2192;</button>
         </div>
       </div>
- 
+
       <!-- Panel 3: What to Expect -->
       <div class="g-panel" id="gp-2">
         <div class="expect-items" id="expect-items"></div>
@@ -896,7 +896,7 @@
           <button class="g-nav-btn primary" onclick="gStep(3)">Find yours &#x2192;</button>
         </div>
       </div>
- 
+
       <!-- Panel 4: Find -->
       <div class="g-panel" id="gp-3">
         <p class="quiz-intro">Answer a few questions and we'll suggest traditions that might be a good fit for where you are right now.</p>
@@ -940,10 +940,10 @@
           <button class="g-nav-btn" onclick="gStep(2)">&#x2190; Back</button>
         </div>
       </div>
- 
+
     </div>
   </section>
- 
+
   <!-- ANCHOR QUOTE -->
   <section class="section-anchor">
     <div class="anchor-circles">
@@ -958,14 +958,14 @@
     <p class="anchor-quote reveal">"...the church of the living God,<br/><strong>the pillar and foundation of the truth."</strong></p>
     <p class="anchor-cite reveal">1 Timothy 3:15 <span style="letter-spacing:0.1em;opacity:0.5;">NIV</span></p>
   </section>
- 
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Stulosphere</div>
     <div class="footer-center">Pointing people to the body of Christ so that Christ is glorified.</div>
     <div class="footer-right">Soli Deo Gloria</div>
   </footer>
- 
+
   <script>
     // Cursor
     const cursor = document.getElementById('cursor');
@@ -977,20 +977,20 @@
       el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';cursor.style.transform='translate(-50%,-50%) scale(2)';});
       el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';cursor.style.transform='translate(-50%,-50%) scale(1)';});
     });
- 
+
     // Nav scroll
     const nav=document.getElementById('nav');
     window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
- 
+
     // Scroll reveal
     const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
     document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
- 
+
     // Gap stagger
     const gapObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.gap-item').forEach((item,i)=>setTimeout(()=>item.classList.add('visible'),i*140));gapObs.unobserve(e.target);}});},{threshold:0.1});
     const gapList=document.querySelector('.gap-list');
     if(gapList) gapObs.observe(gapList);
- 
+
     // ── GUIDE DATA ──
     const whyDetails = [
       "Christianity has always been communal. The early church ate together, prayed together, cared for each other's needs, and bore each other's burdens. The local church is where that kind of community becomes real — not just online, not just theoretical. It's where people who wouldn't otherwise choose each other are knit together by something greater.",
@@ -998,7 +998,7 @@
       "Most of us sense that our lives are meant to add up to something. The church connects you to the oldest, largest, most enduring movement in human history — one centered not on self-improvement but on the redemption of all things through Jesus Christ.",
       "The church is not a concert or a lecture — it's a body. People who share meals, show up in crisis, celebrate births, and grieve losses together. That kind of belonging is increasingly rare in modern life, and the church is one of the few places still built for it."
     ];
- 
+
     const traditions = [
       {name:"Nondenominational",badge:"Evangelical",desc:"Independent congregations not affiliated with a denomination. They tend to be contemporary in style, focused on Scripture and practical application, and vary widely in theology. Many are evangelical in belief.",worship:"Contemporary, often with a band",bible:"High authority, central to teaching",governance:"Elder-led or pastor-led",size:"Ranges from small to very large",vibes:["Casual atmosphere","Modern music","Sermon-focused","Flexible structure"]},
       {name:"Baptist",badge:"Evangelical / Protestant",desc:"Baptist churches emphasize Scripture's authority, believer's baptism by immersion, and the autonomy of the local church. They range from conservative to progressive. Strong tradition of expository preaching.",worship:"Traditional to contemporary",bible:"High authority, inerrant",governance:"Congregational",size:"Wide range",vibes:["Believer's baptism","Strong preaching","Local church autonomy","Community-focused"]},
@@ -1009,7 +1009,7 @@
       {name:"Eastern Orthodox",badge:"Ancient / Liturgical",desc:"One of the oldest Christian traditions. Emphasizes theosis (becoming like God), Holy Tradition alongside Scripture, and richly symbolic liturgical worship. The Divine Liturgy has remained largely unchanged for over a millennium.",worship:"Ancient liturgy, icons, incense",bible:"Scripture within Holy Tradition",governance:"Episcopal, Patriarchal",size:"Usually smaller in the West",vibes:["Ancient worship","Mystical depth","Iconic art","Unchanging liturgy"]},
       {name:"Catholic",badge:"Ancient / Sacramental",desc:"The largest Christian body in the world. Emphasizes Scripture and Tradition, the seven sacraments, apostolic succession through the Pope, and the real presence of Christ in the Eucharist.",worship:"Mass, highly liturgical",bible:"Scripture and Magisterium",governance:"Papal, episcopal hierarchy",size:"Largest globally",vibes:["Sacramental life","Universal church","Rich tradition","Eucharist-centered"]}
     ];
- 
+
     const expectItems = [
       {icon:"🕐",title:"What time should I arrive?",body:"5–10 minutes early is ideal. You'll have time to find a seat, pick up a bulletin, and get comfortable. Most churches are welcoming to newcomers — don't be surprised if someone says hello."},
       {icon:"👕",title:"What should I wear?",body:"There's no dress code at most churches. Some are casual (jeans are fine), others more formal. Smart casual works everywhere. What matters is that you show up — not what you show up in."},
@@ -1018,16 +1018,16 @@
       {icon:"💬",title:"What if I have questions?",body:"Most churches have a welcome area or guest team after the service. Many offer an inquirers class or Alpha course specifically for people exploring faith. No question is too basic."},
       {icon:"📍",title:"How do I know if it's the right church?",body:"Visit a few times before deciding. Pay attention to how people treat each other, whether the Bible is central, and whether you feel welcome. A healthy church will be warm but not pushy. Trust your instincts and keep coming back."}
     ];
- 
+
     const matchLogic = a => {
       if (a[1]==='liturgical') return {t:["Eastern Orthodox","Catholic","Lutheran","Anglican / Episcopal"],d:"Your draw to reverent, structured worship suggests you might connect deeply with a liturgical tradition — one where the form of worship itself carries meaning and history."};
       if (a[2]==='authority' && a[1]!=='liturgical') return {t:["Baptist","Presbyterian","Nondenominational"],d:"Your high view of Scripture and openness to contemporary worship point toward evangelical traditions with strong Bible teaching at the center."};
       if (a[2]==='guide') return {t:["Methodist","Anglican / Episcopal","Lutheran"],d:"You might appreciate traditions that balance Scripture with wisdom, community, and a heart for practical application in everyday life."};
       return {t:["Nondenominational","Methodist","Baptist"],d:"You're still exploring — and that's good. These traditions tend to be welcoming to questions, accessible in style, and focused on community. Start by visiting one."};
     };
- 
+
     let currentTrad=0, quizAnswers={};
- 
+
     function gStep(n) {
       document.querySelectorAll('.g-panel').forEach((p,i)=>p.classList.toggle('active',i===n));
       document.querySelectorAll('.g-step').forEach((s,i)=>{
@@ -1036,7 +1036,7 @@
         s.querySelector('.g-step-num').textContent = i<n ? '✓' : i+1;
       });
     }
- 
+
     function toggleWhy(card, idx) {
       const exp = document.getElementById('why-exp');
       const open = card.classList.contains('selected');
@@ -1046,12 +1046,12 @@
       exp.textContent = whyDetails[idx];
       exp.classList.add('show');
     }
- 
+
     function buildTradTabs() {
       document.getElementById('trad-tabs').innerHTML = traditions.map((t,i)=>`<button class="trad-tab${i===0?' active':''}" onclick="showTrad(${i},this)">${t.name}</button>`).join('');
       showTrad(0);
     }
- 
+
     function showTrad(idx, btn) {
       currentTrad = idx;
       document.querySelectorAll('.trad-tab').forEach((b,i)=>b.classList.toggle('active',i===idx));
@@ -1071,7 +1071,7 @@
           <button class="trad-nav-btn" onclick="showTrad(${(idx+1)%traditions.length})">Next &#x2192;</button>
         </div>`;
     }
- 
+
     function buildExpect() {
       document.getElementById('expect-items').innerHTML = expectItems.map((e,i)=>`
         <div class="expect-item${i===0?' open':''}" id="ei-${i}">
@@ -1082,11 +1082,11 @@
           <div class="expect-body">${e.body}</div>
         </div>`).join('');
     }
- 
+
     function toggleExpect(i) {
       document.getElementById('ei-'+i).classList.toggle('open');
     }
- 
+
     function pickOpt(btn) {
       const q = btn.dataset.q;
       document.querySelectorAll(`.q-opt[data-q="${q}"]`).forEach(b=>b.classList.remove('selected'));
@@ -1094,14 +1094,14 @@
       quizAnswers[q] = btn.dataset.val;
       if (Object.keys(quizAnswers).length >= 3) showMatch();
     }
- 
+
     function showMatch() {
       const m = matchLogic(quizAnswers);
       document.getElementById('match-pills').innerHTML = m.t.map(t=>`<span class="match-pill">${t}</span>`).join('');
       document.getElementById('match-text').textContent = m.d;
       document.getElementById('match-box').classList.add('show');
     }
- 
+
     buildTradTabs();
     buildExpect();
   </script>
