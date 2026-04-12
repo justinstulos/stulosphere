@@ -243,9 +243,31 @@
     .gap-us { font-family: 'DM Sans', sans-serif; font-size: 1.2rem; font-weight: 400; color: var(--silver); }
 
     /* ── CHURCH GUIDE ── */
-    .section-guide { background: var(--bg2); display: flex; flex-direction: column; align-items: center; }
+    .section-guide {
+      background: var(--bg);
+      display: flex; flex-direction: column; align-items: center;
+      border-top: 1px solid var(--line-bright);
+      box-shadow: inset 0 1px 0 var(--line-bright);
+    }
     .section-guide .section-header { width: 100%; justify-content: center; }
     .section-guide .section-line { display: none; }
+
+    .guide-intro { text-align: center; margin-bottom: 4rem; max-width: 600px; }
+    .guide-heading { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 1rem; }
+    .guide-heading em { font-style: italic; color: var(--silver-mid); }
+    .guide-subheading { font-size: 1.05rem; color: var(--silver-mid); line-height: 1.8; margin-bottom: 1.5rem; }
+    .guide-interactive-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'DM Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid var(--accent);
+      padding: 6px 16px;
+      animation: badgePulse 3s ease-in-out infinite;
+    }
+    @keyframes badgePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
 
     .guide-wrap { width: 100%; max-width: 860px; margin: 0 auto; }
 
@@ -548,6 +570,9 @@
 
       /* --- Find a Church: redesigned for mobile --- */
       .section-guide { padding: 4.5rem 1.25rem; align-items: stretch; }
+      .guide-intro { text-align: center; margin-bottom: 2.5rem; }
+      .guide-heading { font-size: clamp(1.5rem, 6vw, 2rem); }
+      .guide-subheading { font-size: 0.95rem; }
       .guide-wrap { width: 100%; overflow: hidden; }
 
       /* Step nav: pill row, scrollable */
@@ -687,7 +712,7 @@
   <nav id="nav">
     <a class="nav-logo" href="#hero">Stulosphere</a>
     <div class="nav-links">
-      <a class="nav-link" href="#opportunity">Vision</a>
+      <a class="nav-link" href="#opportunity">Who We Are</a>
       <a class="nav-link" href="#values">Values</a>
       <a class="nav-link" href="#guide">Find a Church</a>
     </div>
@@ -717,38 +742,25 @@
     </div>
   </section>
 
-  <!-- OPPORTUNITY -->
+  <!-- WHO WE ARE -->
   <section class="section section-problem" id="opportunity">
     <div class="section-header reveal">
       <span class="section-num">01</span>
-      <span class="section-title">The Opportunity</span>
+      <span class="section-title">Who We Are</span>
       <div class="section-line"></div>
     </div>
     <div class="problem-layout">
       <div class="problem-heading reveal">
-        People are searching.
-        <em>The church is the answer.</em>
+        Connective tissue<br>
+        <em>for the body of Christ.</em>
       </div>
       <div class="problem-body">
         <p class="reveal">People are searching. For truth, for community, for something that holds. But in a world shaped by algorithms and noise, they don't know where to look.</p>
-        <p class="reveal">The local church has always been the answer. It is where truth is proclaimed, where community is formed, where the lost become found. Jesus promised to build it. The Spirit sustains it.</p>
-        <p class="reveal">Stulosphere exists to connect the searching to the church.</p>
+        <p class="reveal">The local church has always been the answer — where truth is proclaimed, community is formed, and the lost become found. Jesus promised to build it. The Spirit sustains it.</p>
+        <p class="reveal">Stulosphere exists to connect the searching to the church. We meet people where they are and walk alongside them toward the one place that can truly ground them.</p>
       </div>
     </div>
-  </section>
-
-  <!-- WHAT WE ARE -->
-  <section class="section section-what" id="what">
-    <div class="section-header reveal">
-      <span class="section-num">02</span>
-      <span class="section-title">What We Are</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="what-intro reveal">
-      <h2>Connective tissue<br>for the body of Christ.</h2>
-      <p>We bridge the gap between church networks, content, and individual Christians, walking people toward the one place that can truly ground them.</p>
-    </div>
-    <div class="cards-grid">
+    <div class="cards-grid" style="margin-top:5rem;">
       <div class="card reveal">
         <div class="card-tag">The Search</div>
         <h3>People are looking</h3>
@@ -775,14 +787,14 @@
   <!-- VALUES -->
   <section class="section section-values" id="values">
     <div class="section-header reveal">
-      <span class="section-num">03</span>
+      <span class="section-num">02</span>
       <span class="section-title">Core Values</span>
       <div class="section-line"></div>
     </div>
     <div class="values-layout">
       <div class="values-sidebar reveal">
         <h2>Three irreducible convictions.</h2>
-        <p>The load-bearing walls of everything we do. Simple, anchored, non-negotiable.</p>
+        <p>Simple, anchored, non-negotiable.</p>
       </div>
       <div class="values-items">
         <div class="value-row reveal">
@@ -816,7 +828,7 @@
   <!-- WHAT WE DO -->
   <section class="section section-gap" id="gap">
     <div class="section-header reveal">
-      <span class="section-num">04</span>
+      <span class="section-num">03</span>
       <span class="section-title">What We Do</span>
       <div class="section-line"></div>
     </div>
@@ -831,9 +843,14 @@
   <!-- CHURCH GUIDE -->
   <section class="section section-guide" id="guide">
     <div class="section-header reveal">
-      <span class="section-num">05</span>
+      <span class="section-num">04</span>
       <span class="section-title">Find a Church</span>
       <div class="section-line"></div>
+    </div>
+    <div class="guide-intro reveal">
+      <h2 class="guide-heading">Your guide to finding<br><em>the right church.</em></h2>
+      <p class="guide-subheading">Work through the four steps below — tap each section to explore.</p>
+      <div class="guide-interactive-badge">&#x2194; Interactive Guide</div>
     </div>
     <div class="guide-wrap reveal">
 
