@@ -399,6 +399,20 @@
     .match-btn.secondary { background: transparent; color: var(--silver-mid); border-color: var(--line); }
     .match-btn.secondary:hover { border-color: var(--line-bright); color: var(--silver); }
 
+    .marks-list { display: flex; flex-direction: column; margin-bottom: 2rem; }
+    .mark-item { display: grid; grid-template-columns: 48px 1fr; gap: 1.5rem; padding: 2rem 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .mark-item:first-child { border-top: 1px solid var(--line); }
+    .mark-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; color: var(--silver-dim); padding-top: 0.3rem; }
+    .mark-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; line-height: 1.2; }
+    .mark-ref { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.75rem; }
+    .mark-desc { font-size: 1rem; line-height: 1.85; color: var(--silver-mid); }
+    .marks-note { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; line-height: 1.8; color: var(--silver-dim); border-left: 2px solid var(--silver-faint); padding-left: 1.25rem; margin-bottom: 2rem; }
+    @media (max-width: 768px) {
+      .mark-item { grid-template-columns: 36px 1fr; gap: 1rem; padding: 1.5rem 0; }
+      .mark-title { font-size: 1.05rem; }
+      .mark-desc { font-size: 0.95rem; }
+    }
+
     /* GUIDE NAV */
     .g-nav { display: flex; justify-content: flex-end; gap: 8px; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); }
     .g-nav-btn {
@@ -849,7 +863,7 @@
     </div>
     <div class="guide-intro reveal">
       <h2 class="guide-heading">Your guide to finding<br><em>the right church.</em></h2>
-      <p class="guide-subheading">Work through the four steps below, tap each section to explore.</p>
+      <p class="guide-subheading">Work through the five steps below, tap each section to explore.</p>
       <div class="guide-interactive-badge">&#x2194; Interactive Guide</div>
     </div>
     <div class="guide-wrap reveal">
@@ -863,6 +877,8 @@
         <div class="g-step" data-step="2" onclick="gStep(2)"><div class="g-step-num">3</div>What to expect</div>
         <div class="g-step-div"></div>
         <div class="g-step" data-step="3" onclick="gStep(3)"><div class="g-step-num">4</div>Find yours</div>
+        <div class="g-step-div"></div>
+        <div class="g-step" data-step="4" onclick="gStep(4)"><div class="g-step-num">5</div>What to look for</div>
       </div>
 
       <!-- Panel 1: Why Church -->
@@ -955,6 +971,59 @@
         </div>
         <div class="g-nav">
           <button class="g-nav-btn" onclick="gStep(2)">&#x2190; Back</button>
+          <button class="g-nav-btn primary" onclick="gStep(4)">What to look for &#x2192;</button>
+        </div>
+      </div>
+
+      <!-- Panel 5: What to Look For -->
+      <div class="g-panel" id="gp-4">
+        <p class="quiz-intro">Tradition is a starting point, not a guarantee. Here are five marks of a healthy, biblical church. Use these when you visit.</p>
+        <div class="marks-list">
+          <div class="mark-item">
+            <div class="mark-num">01</div>
+            <div class="mark-body">
+              <div class="mark-title">The gospel is preached clearly</div>
+              <div class="mark-ref">1 Corinthians 15:3–4</div>
+              <p class="mark-desc">Every sermon should point to Christ crucified and risen. Not just moral advice or life tips. If Jesus is absent from the pulpit, the church has lost its center.</p>
+            </div>
+          </div>
+          <div class="mark-item">
+            <div class="mark-num">02</div>
+            <div class="mark-body">
+              <div class="mark-title">Scripture is the authority</div>
+              <div class="mark-ref">2 Timothy 3:16–17</div>
+              <p class="mark-desc">The Bible should shape what the church teaches, not the other way around. A healthy church submits to Scripture even when it's uncomfortable.</p>
+            </div>
+          </div>
+          <div class="mark-item">
+            <div class="mark-num">03</div>
+            <div class="mark-body">
+              <div class="mark-title">The sacraments are practiced</div>
+              <div class="mark-ref">Matthew 28:19, Luke 22:19</div>
+              <p class="mark-desc">Baptism and the Lord's Supper should be observed as Christ commanded, not as extras or afterthoughts. They are visible signs of the gospel.</p>
+            </div>
+          </div>
+          <div class="mark-item">
+            <div class="mark-num">04</div>
+            <div class="mark-body">
+              <div class="mark-title">There is real community and accountability</div>
+              <div class="mark-ref">Hebrews 10:24–25</div>
+              <p class="mark-desc">People should know each other's names. Look for genuine care, small groups, and a culture where people are honest with one another and show up in hard times.</p>
+            </div>
+          </div>
+          <div class="mark-item">
+            <div class="mark-num">05</div>
+            <div class="mark-body">
+              <div class="mark-title">Leadership is accountable and servant-hearted</div>
+              <div class="mark-ref">1 Peter 5:2–3</div>
+              <p class="mark-desc">Healthy churches have transparent, humble leadership. Be cautious of a church built entirely around one personality, or where leadership is unaccountable to anyone.</p>
+            </div>
+          </div>
+        </div>
+        <div class="marks-note">These marks cross every tradition. A church can be liturgical or contemporary, large or small, and still be healthy or unhealthy. These are the things that matter most.</div>
+        <div class="g-nav">
+          <button class="g-nav-btn" onclick="gStep(3)">&#x2190; Back</button>
+          <a class="g-nav-btn primary" href="https://www.google.com/maps/search/church+near+me" target="_blank" rel="noopener">Find churches near me &#x2197;</a>
         </div>
       </div>
 
@@ -1017,30 +1086,29 @@
     ];
 
     const traditions = [
-      {name:"Nondenominational",badge:"Evangelical",desc:"Independent congregations not affiliated with a denomination. They tend to be contemporary in style, focused on Scripture and practical application, and vary widely in theology. Many are evangelical in belief.",worship:"Contemporary, often with a band",bible:"High authority, central to teaching",governance:"Elder-led or pastor-led",size:"Ranges from small to very large",vibes:["Casual atmosphere","Modern music","Sermon-focused","Flexible structure"]},
-      {name:"Baptist",badge:"Evangelical / Protestant",desc:"Baptist churches emphasize Scripture's authority, believer's baptism by immersion, and the autonomy of the local church. They range from conservative to progressive. Strong tradition of expository preaching.",worship:"Traditional to contemporary",bible:"High authority, inerrant",governance:"Congregational",size:"Wide range",vibes:["Believer's baptism","Strong preaching","Local church autonomy","Community-focused"]},
-      {name:"Presbyterian",badge:"Reformed / Protestant",desc:"Rooted in the Reformation theology of John Calvin. Known for doctrinal depth, ordered worship, and a plurality of elders governing the church. Emphasizes God's sovereignty in salvation.",worship:"Structured, liturgical elements",bible:"Inerrant, Reformed reading",governance:"Elder-governed (presbytery)",size:"Usually mid-sized",vibes:["Theological depth","Orderly worship","Confessional standards","Covenant theology"]},
-      {name:"Lutheran",badge:"Protestant / Liturgical",desc:"Founded on Luther's Reformation. Emphasizes grace alone, faith alone, Scripture alone. Maintains liturgical worship and a high view of the sacraments, especially communion and baptism.",worship:"Liturgical, historic forms",bible:"Authoritative, grace-centered",governance:"Varies by synod",size:"Mid-sized to large",vibes:["Word and sacrament","Liturgical rhythm","Grace-centered","Reformation heritage"]},
-      {name:"Methodist",badge:"Protestant / Wesleyan",desc:"From John Wesley's 18th-century revival. Emphasizes personal holiness, social justice, free will in salvation, and the sanctifying work of the Holy Spirit. Often warm and community-oriented.",worship:"Traditional to contemporary",bible:"Authoritative, Wesleyan lens",governance:"Episcopal (bishops)",size:"Wide range",vibes:["Warm community","Social compassion","Personal holiness","Hymn tradition"]},
-      {name:"Anglican / Episcopal",badge:"Protestant / Liturgical",desc:"The tradition of the Church of England combining Catholic liturgical practice with Protestant theology. Known for the Book of Common Prayer and a via media (middle way) approach.",worship:"Liturgical, Prayer Book-based",bible:"Authoritative within tradition",governance:"Episcopal (bishops)",size:"Mid-sized",vibes:["Book of Common Prayer","Sacramental focus","Theological breadth","Historic liturgy"]},
-      {name:"Eastern Orthodox",badge:"Ancient / Liturgical",desc:"One of the oldest Christian traditions. Emphasizes theosis (becoming like God), Holy Tradition alongside Scripture, and richly symbolic liturgical worship. The Divine Liturgy has remained largely unchanged for over a millennium.",worship:"Ancient liturgy, icons, incense",bible:"Scripture within Holy Tradition",governance:"Episcopal, Patriarchal",size:"Usually smaller in the West",vibes:["Ancient worship","Mystical depth","Iconic art","Unchanging liturgy"]},
-      {name:"Catholic",badge:"Ancient / Sacramental",desc:"The largest Christian body in the world. Emphasizes Scripture and Tradition, the seven sacraments, apostolic succession through the Pope, and the real presence of Christ in the Eucharist.",worship:"Mass, highly liturgical",bible:"Scripture and Magisterium",governance:"Papal, episcopal hierarchy",size:"Largest globally",vibes:["Sacramental life","Universal church","Rich tradition","Eucharist-centered"]}
+      {name:"Evangelical",badge:"Protestant",desc:"The broadest and most diverse stream of Protestantism. Evangelical churches hold a high view of Scripture, emphasize personal faith and conversion, and center ministry on gospel proclamation. Includes Baptist, nondenominational, Bible church, and many independent congregations. Wide range in style, size, and culture.",worship:"Contemporary to traditional, sermon-centered",bible:"High authority, often inerrant",governance:"Elder-led, congregational, or pastor-led",size:"All sizes",vibes:["Gospel-centered preaching","Personal faith","Scripture-focused","Accessible entry point"]},
+      {name:"Reformed",badge:"Protestant / Calvinist",desc:"Rooted in the theology of the Reformation, particularly John Calvin. Reformed churches emphasize God's sovereignty in salvation, the authority of Scripture, and careful doctrinal precision. Includes Presbyterian, Reformed Baptist, and Continental Reformed congregations. Known for depth, catechesis, and confessional standards.",worship:"Structured, Word-centered, often traditional",bible:"Inerrant, Reformed hermeneutic",governance:"Elder-governed (presbytery or session)",size:"Usually small to mid-sized",vibes:["Theological depth","Confessional standards","Covenant theology","Expository preaching"]},
+      {name:"Charismatic / Pentecostal",badge:"Evangelical / Spirit-Emphasizing",desc:"Emphasizes the ongoing work of the Holy Spirit, including gifts such as tongues, prophecy, and healing. Pentecostal churches trace their roots to the early 20th-century Azusa Street Revival. Charismatic churches carry similar convictions across many denominations. Often expressive, Spirit-filled, and evangelistically passionate.",worship:"Expressive, Spirit-led, contemporary",bible:"High authority, Spirit-illumined",governance:"Pastor-led, apostolic in some streams",size:"Wide range, often large",vibes:["Spirit-filled worship","Expectant prayer","Gifts of the Spirit","Evangelistic zeal"]},
+      {name:"Liturgical Protestant",badge:"Protestant / Historic",desc:"Includes Lutheran, Anglican, Episcopal, Methodist, and related traditions. These churches carry a deep sense of historical continuity, structured worship, and a high view of the sacraments. The rhythm of the church calendar, written prayers, and formal liturgy shape gathered worship each week. Theologically diverse within each tradition.",worship:"Liturgical, Prayer Book or order of service",bible:"Authoritative within tradition",governance:"Episcopal (bishops) or synodal",size:"Mid-sized, established congregations",vibes:["Historic liturgy","Sacramental life","Church calendar","Word and Table"]},
+      {name:"Eastern Orthodox",badge:"Ancient / Creedal",desc:"One of the oldest expressions of Christianity, tracing its roots through the Eastern Roman Empire to the apostolic church. Emphasizes theosis (union with God), Holy Tradition alongside Scripture, the seven ecumenical councils, and richly symbolic liturgical worship. The Divine Liturgy is largely unchanged for over a millennium. A smaller but growing presence in the West.",worship:"Ancient liturgy, icons, incense, chant",bible:"Scripture within Holy Tradition",governance:"Episcopal, Patriarchal",size:"Usually smaller in the West",vibes:["Ancient worship","Mystical depth","Unchanging liturgy","Creedal orthodoxy"]}
     ];
 
     const expectItems = [
       {icon:"🕐",title:"What time should I arrive?",body:"5–10 minutes early is ideal. You'll have time to find a seat, pick up a bulletin, and get comfortable. Most churches are welcoming to newcomers, don't be surprised if someone says hello."},
       {icon:"👕",title:"What should I wear?",body:"There's no dress code at most churches. Some are casual (jeans are fine), others more formal. Smart casual works everywhere. What matters is that you show up, not what you show up in."},
-      {icon:"🎵",title:"What does a service look like?",body:"Most Protestant services include singing, prayer, Scripture reading, and a sermon, usually 30–45 minutes. Catholic and liturgical churches follow a structured liturgy including responsive readings, the Eucharist, and set prayers."},
+      {icon:"🎵",title:"What does a service look like?",body:"Most Protestant services include singing, prayer, Scripture reading, and a sermon, usually 30–45 minutes. Liturgical churches follow a structured order of service including responsive readings, the Lord's Supper, and set prayers."},
       {icon:"🙏",title:"Will I be asked to do anything?",body:"No. You can simply observe. If an offering is taken, it's for members; visitors are not expected to give. Communion practices vary: some invite everyone, others reserve it for baptized believers. Watch what others do or ask."},
       {icon:"💬",title:"What if I have questions?",body:"Most churches have a welcome area or guest team after the service. Many offer an inquirers class or Alpha course specifically for people exploring faith. No question is too basic."},
       {icon:"📍",title:"How do I know if it's the right church?",body:"Visit a few times before deciding. Pay attention to how people treat each other, whether the Bible is central, and whether you feel welcome. A healthy church will be warm but not pushy. Trust your instincts and keep coming back."}
     ];
 
     const matchLogic = a => {
-      if (a[1]==='liturgical') return {t:["Eastern Orthodox","Catholic","Lutheran","Anglican / Episcopal"],d:"Your draw to reverent, structured worship suggests you might connect deeply with a liturgical tradition, one where the form of worship itself carries meaning and history."};
-      if (a[2]==='authority' && a[1]!=='liturgical') return {t:["Baptist","Presbyterian","Nondenominational"],d:"Your high view of Scripture and openness to contemporary worship point toward evangelical traditions with strong Bible teaching at the center."};
-      if (a[2]==='guide') return {t:["Methodist","Anglican / Episcopal","Lutheran"],d:"You might appreciate traditions that balance Scripture with wisdom, community, and a heart for practical application in everyday life."};
-      return {t:["Nondenominational","Methodist","Baptist"],d:"You're still exploring, and that's good. These traditions tend to be welcoming to questions, accessible in style, and focused on community. Start by visiting one."};
+      if (a[1]==='liturgical') return {t:["Eastern Orthodox","Liturgical Protestant"],d:"Your draw to reverent, structured worship suggests you might connect deeply with a liturgical tradition, one where the form of worship itself carries meaning and history."};
+      if (a[2]==='authority' && a[1]==='contemporary') return {t:["Evangelical","Reformed"],d:"Your high view of Scripture and openness to contemporary worship point toward evangelical or Reformed traditions with strong Bible teaching at the center."};
+      if (a[2]==='authority' && a[1]==='either') return {t:["Reformed","Evangelical"],d:"Reformed and evangelical churches both place Scripture at the center. Reformed traditions tend toward more structured worship; evangelical churches span a wide range of styles."};
+      if (a[1]==='contemporary' && a[2]==='curious') return {t:["Evangelical","Charismatic / Pentecostal"],d:"An accessible, contemporary church might be a good starting point. These traditions tend to be welcoming to questions and focused on helping people take a next step."};
+      if (a[2]==='guide') return {t:["Liturgical Protestant","Evangelical"],d:"You might appreciate traditions that balance Scripture with wisdom, community, and a heart for practical application in everyday life."};
+      return {t:["Evangelical","Reformed","Charismatic / Pentecostal"],d:"You're still exploring, and that's good. These traditions tend to be welcoming to questions, accessible in style, and focused on community. Start by visiting one."};
     };
 
     let currentTrad=0, quizAnswers={};
