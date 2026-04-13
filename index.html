@@ -388,7 +388,7 @@
     .expect-item.open .expect-caret { transform: rotate(180deg); }
     .expect-item.open .expect-body { display: block; }
 
-    .guide-swipe-hint { display: none; }
+    .why-expand-inline { display: none; }
 
     /* FIND YOURS */
     .fy-tagline { font-size: 1.15rem; color: var(--silver); line-height: 1.75; margin-bottom: 2.5rem; max-width: 540px; }
@@ -663,6 +663,19 @@
       .why-card p { font-size: 0.92rem; }
       .why-expand { font-size: 0.95rem; padding: 1.25rem; line-height: 1.75; }
 
+      .why-expand { display: none !important; }
+      .why-expand-inline {
+        display: none;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(184,198,220,0.15);
+        font-family: 'Playfair Display', serif;
+        font-size: 0.95rem;
+        line-height: 1.8;
+        color: var(--silver);
+      }
+      .why-card.selected .why-expand-inline { display: block; }
+
       /* Traditions: dropdown-style selector on mobile */
       .trad-tabs {
         display: grid;
@@ -808,21 +821,25 @@
             <div class="why-card-label">Community</div>
             <h3>You were made for this</h3>
             <p>Faith was never meant to be solo. The church is a family.</p>
+            <div class="why-expand-inline"></div>
           </div>
           <div class="why-card" onclick="toggleWhy(this,1)">
             <div class="why-card-label">Truth</div>
             <h3>Something that holds</h3>
             <p>In a world full of noise, the church has carried the same story for 2,000 years.</p>
+            <div class="why-expand-inline"></div>
           </div>
           <div class="why-card" onclick="toggleWhy(this,2)">
             <div class="why-card-label">Mission</div>
             <h3>Bigger than yourself</h3>
             <p>The church connects you to a mission that outlasts any individual life.</p>
+            <div class="why-expand-inline"></div>
           </div>
           <div class="why-card" onclick="toggleWhy(this,3)">
             <div class="why-card-label">Belonging</div>
             <h3>A place to be known</h3>
             <p>Not just a service to attend, a community that walks through life with you.</p>
+            <div class="why-expand-inline"></div>
           </div>
         </div>
         <div class="why-expand" id="why-exp"></div>
@@ -1147,11 +1164,24 @@
     function toggleWhy(card, idx) {
       const exp = document.getElementById('why-exp');
       const open = card.classList.contains('selected');
-      document.querySelectorAll('.why-card').forEach(c=>c.classList.remove('selected'));
+      document.querySelectorAll('.why-card').forEach(c => {
+        c.classList.remove('selected');
+        const inl = c.querySelector('.why-expand-inline');
+        if (inl) inl.textContent = '';
+      });
       if (open) { exp.classList.remove('show'); return; }
       card.classList.add('selected');
       exp.textContent = whyDetails[idx];
       exp.classList.add('show');
+      // On mobile: populate the inline blurb and scroll it into view
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile) {
+        const inl = card.querySelector('.why-expand-inline');
+        if (inl) {
+          inl.textContent = whyDetails[idx];
+          setTimeout(() => inl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+        }
+      }
     }
 
     function buildTradTabs() {
