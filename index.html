@@ -641,24 +641,30 @@
       /* Outer wrap clips the track */
       .guide-wrap { width: 100%; overflow: hidden; }
 
-      /* Horizontal snap scroll track */
+      /* Horizontal snap scroll track — fixed height, vertical scroll inside each panel */
       .guide-panels-track {
         display: flex;
         overflow-x: scroll;
+        overflow-y: hidden;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        height: 75vh;
       }
       .guide-panels-track::-webkit-scrollbar { display: none; }
 
-      /* Each panel is one full-width snap slide */
+      /* Each panel is one full-width snap slide, scrolls vertically inside */
       .g-panel {
         display: block !important;
         flex: 0 0 100%;
         width: 100%;
         scroll-snap-align: start;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         padding-bottom: 1rem;
+        scrollbar-width: none;
       }
+      .g-panel::-webkit-scrollbar { display: none; }
 
       /* Step label at top of each slide */
       .g-panel-label {
