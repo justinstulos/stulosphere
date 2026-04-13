@@ -633,23 +633,22 @@
       .guide-subheading { font-size: 0.95rem; }
 
       .guide-swipe-hint { display: none; }
-
-      /* Hide step nav bar on mobile */
       .guide-steps { display: none; }
 
-      /* Outer wrap clips the sliding track */
-      .guide-wrap { width: 100%; overflow: hidden; }
+      /* Clip the sliding track */
+      .guide-wrap { width: 100%; overflow: hidden; position: relative; }
 
-      /* Track slides via translateX — no scroll involved */
+      /* Track: no scroll — moves by transform only */
       .guide-panels-track {
         display: flex;
         width: 100%;
         overflow: visible;
-        transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s ease;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         will-change: transform;
+        touch-action: pan-y;
       }
 
-      /* Each panel is one full-width slide */
+      /* Each panel locks to 100% width */
       .g-panel {
         display: block !important;
         flex: 0 0 100%;
@@ -1285,94 +1284,17 @@
 
     const stepNames = ['Why Church','Traditions','What to Expect','Find Yours','What to Look For'];
 
-    // ── Slider state ──────────────────────────────────────────────
-    const track     = document.getElementById('guide-track');
-    const dotsTop   = document.querySelectorAll('#guide-mobile-dots-top .gm-dot');
-    const swipeCue  = document.getElementById('guide-swipe-cue');
-    const TOTAL     = 5;
-    let   currentStep = 0;
-    let   hasSwiped   = false;
-
-    function isMobile() { return window.innerWidth <= 768; }
-
-    // Move slider to step n (mobile: transform; desktop: class toggle)
     function gStep(n) {
-      n = Math.max(0, Math.min(TOTAL - 1, n));
-      currentStep = n;
-
-      // Always update panel active classes (desktop uses these)
-      document.querySelectorAll('.g-panel').forEach((p,i) => p.classList.toggle('active', i === n));
-      document.querySelectorAll('.g-step').forEach((s,i) => {
-        s.classList.toggle('active', i === n);
-        s.classList.toggle('done',   i < n);
-        s.querySelector('.g-step-num').textContent = i < n ? '✓' : i + 1;
+      document.querySelectorAll('.g-panel').forEach((p,i)=>p.classList.toggle('active',i===n));
+      document.querySelectorAll('.g-step').forEach((s,i)=>{
+        s.classList.toggle('active',i===n);
+        s.classList.toggle('done',i<n);
+        s.querySelector('.g-step-num').textContent = i<n ? '✓' : i+1;
       });
-
-      if (isMobile() && track) {
-        // Slide via transform — zero scroll, zero snap conflicts
-        track.style.transform = `translateX(-${n * 100}%)`;
-        // Update dots
-        dotsTop.forEach((d, i) => d.classList.toggle('active', i === n));
-        // Update height to match new panel
-        fitTrackToPanel(n);
-        // Hide swipe cue once user navigates
-        if (n > 0 && !hasSwiped) {
-          hasSwiped = true;
-          if (swipeCue) swipeCue.classList.add('hidden');
-        }
-      }
     }
 
-    // Resize track height to match current panel's content
-    function fitTrackToPanel(idx) {
-      if (!isMobile() || !track) return;
-      const panels = track.querySelectorAll('.g-panel');
-      if (panels[idx]) {
-        const inner = panels[idx].querySelector('.g-panel-inner');
-        const h = inner ? inner.offsetHeight : panels[idx].scrollHeight;
-        track.style.height = h + 'px';
-      }
-    }
-
-    // ── Touch swipe detection ─────────────────────────────────────
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let swiping = false;
-
-    if (track) {
-      track.addEventListener('touchstart', e => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-        swiping = false;
-      }, { passive: true });
-
-      track.addEventListener('touchmove', e => {
-        if (!isMobile()) return;
-        const dx = e.touches[0].clientX - touchStartX;
-        const dy = e.touches[0].clientY - touchStartY;
-        // Only intercept horizontal swipes
-        if (!swiping && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) {
-          swiping = true;
-        }
-        if (swiping) e.preventDefault(); // stop page scroll during horizontal swipe
-      }, { passive: false });
-
-      track.addEventListener('touchend', e => {
-        if (!isMobile() || !swiping) return;
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        const THRESHOLD = 50; // px needed to trigger a slide
-        if (dx < -THRESHOLD && currentStep < TOTAL - 1) {
-          gStep(currentStep + 1);
-        } else if (dx > THRESHOLD && currentStep > 0) {
-          gStep(currentStep - 1);
-        }
-        swiping = false;
-      }, { passive: true });
-    }
-
-    // ── Content builders ──────────────────────────────────────────
     function toggleWhy(card, idx) {
-      const exp  = document.getElementById('why-exp');
+      const exp = document.getElementById('why-exp');
       const open = card.classList.contains('selected');
       document.querySelectorAll('.why-card').forEach(c => {
         c.classList.remove('selected');
@@ -1383,14 +1305,11 @@
       card.classList.add('selected');
       exp.textContent = whyDetails[idx];
       exp.classList.add('show');
-      if (isMobile()) {
+      if (isMob()) {
         const inl = card.querySelector('.why-expand-inline');
         if (inl) {
           inl.textContent = whyDetails[idx];
-          setTimeout(() => {
-            inl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            fitTrackToPanel(currentStep);
-          }, 50);
+          setTimeout(() => { fitHeight(cur); }, 50);
         }
       }
     }
@@ -1419,7 +1338,7 @@
           <button class="trad-nav-btn" onclick="showTrad(${(idx-1+traditions.length)%traditions.length})">&#x2190; Previous</button>
           <button class="trad-nav-btn" onclick="showTrad(${(idx+1)%traditions.length})">Next &#x2192;</button>
         </div>`;
-      setTimeout(() => fitTrackToPanel(currentStep), 50);
+      setTimeout(() => fitHeight(cur), 50);
     }
 
     function buildExpect() {
@@ -1435,19 +1354,91 @@
 
     function toggleExpect(i) {
       document.getElementById('ei-'+i).classList.toggle('open');
-      setTimeout(() => fitTrackToPanel(currentStep), 10);
+      setTimeout(() => fitHeight(cur), 10);
     }
 
     function toggleMark(item) {
-      if (!isMobile()) return;
+      if (!isMob()) return;
       item.classList.toggle('open');
-      setTimeout(() => fitTrackToPanel(currentStep), 10);
+      setTimeout(() => fitHeight(cur), 10);
     }
 
-    // ── Init ──────────────────────────────────────────────────────
+    // ── Slider core ───────────────────────────────────────────────
+    const track     = document.getElementById('guide-track');
+    const guideWrap = track ? track.closest('.guide-wrap') : null;
+    const dotsTop   = document.querySelectorAll('#guide-mobile-dots-top .gm-dot');
+    const swipeCue  = document.getElementById('guide-swipe-cue');
+    const TOTAL     = 5;
+    let   cur       = 0;
+    let   hasSwiped = false;
+
+    function isMob() { return window.innerWidth <= 768; }
+
+    function fitHeight(idx) {
+      if (!isMob() || !track) return;
+      const panel = track.querySelectorAll('.g-panel')[idx];
+      if (!panel) return;
+      const inner = panel.querySelector('.g-panel-inner');
+      track.style.height = (inner ? inner.offsetHeight : panel.scrollHeight) + 'px';
+    }
+
+    function goTo(n) {
+      n = Math.max(0, Math.min(TOTAL - 1, n));
+      cur = n;
+      document.querySelectorAll('.g-panel').forEach((p, i) => p.classList.toggle('active', i === n));
+      document.querySelectorAll('.g-step').forEach((s, i) => {
+        s.classList.toggle('active', i === n);
+        s.classList.toggle('done',   i < n);
+        s.querySelector('.g-step-num').textContent = i < n ? '✓' : i + 1;
+      });
+      if (isMob() && track) {
+        track.style.transform = `translateX(-${n * 100}%)`;
+        dotsTop.forEach((d, i) => d.classList.toggle('active', i === n));
+        fitHeight(n);
+        if (n > 0 && !hasSwiped) { hasSwiped = true; if (swipeCue) swipeCue.classList.add('hidden'); }
+      }
+    }
+
+    function gStep(n) { goTo(n); }
+
+    // ── Touch on WRAP (above buttons) so inner buttons don't swallow it ──
+    let tx0 = 0, ty0 = 0, tracking = false, moved = false;
+
+    function onTouchStart(e) {
+      if (!isMob()) return;
+      tx0 = e.touches[0].clientX;
+      ty0 = e.touches[0].clientY;
+      tracking = true; moved = false;
+    }
+    function onTouchMove(e) {
+      if (!isMob() || !tracking) return;
+      const dx = e.touches[0].clientX - tx0;
+      const dy = e.touches[0].clientY - ty0;
+      if (!moved) {
+        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        if (Math.abs(dy) > Math.abs(dx)) { tracking = false; return; }
+        moved = true;
+      }
+      e.preventDefault(); // block page scroll only during horizontal swipe
+    }
+    function onTouchEnd(e) {
+      if (!isMob() || !tracking || !moved) { tracking = false; return; }
+      const dx = e.changedTouches[0].clientX - tx0;
+      if (dx < -44 && cur < TOTAL - 1) goTo(cur + 1);
+      else if (dx >  44 && cur > 0)    goTo(cur - 1);
+      tracking = false; moved = false;
+    }
+
+    if (guideWrap) {
+      guideWrap.addEventListener('touchstart', onTouchStart, { passive: true });
+      guideWrap.addEventListener('touchmove',  onTouchMove,  { passive: false });
+      guideWrap.addEventListener('touchend',   onTouchEnd,   { passive: true });
+    }
+
+    // ── Content builders ──────────────────────────────────────────
     buildTradTabs();
     buildExpect();
-    setTimeout(() => fitTrackToPanel(0), 100);
+    setTimeout(() => fitHeight(0), 120);
   </script>
 </body>
 </html>
