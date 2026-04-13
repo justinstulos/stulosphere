@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -389,6 +389,7 @@
     .expect-item.open .expect-body { display: block; }
 
     .guide-mobile-dots { display: none; }
+    .guide-swipe-cue { display: none; }
     .g-panel-label { display: none; }
 
     /* FIND YOURS */
@@ -666,15 +667,76 @@
         letter-spacing: 0.1em;
       }
 
+      /* Swipe cue */
+      .guide-swipe-cue {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      .swipe-cue-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 20px;
+        border: 1px solid rgba(184,198,220,0.2);
+        background: rgba(184,198,220,0.04);
+      }
+      .swipe-cue-arrows {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .sca {
+        font-family: 'DM Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--accent);
+      }
+      .sca-l { animation: swipePulseL 1.8s ease-in-out infinite; }
+      .sca-r { animation: swipePulseR 1.8s ease-in-out infinite 0.3s; }
+      .sca-bar {
+        width: 32px; height: 1px;
+        background: linear-gradient(90deg, var(--accent), rgba(184,198,220,0.15), var(--accent));
+        background-size: 200% 100%;
+        animation: swipeBar 1.8s linear infinite;
+      }
+      @keyframes swipePulseL {
+        0%, 100% { opacity: 0.3; transform: translateX(0); }
+        50% { opacity: 1; transform: translateX(-3px); }
+      }
+      @keyframes swipePulseR {
+        0%, 100% { opacity: 0.3; transform: translateX(0); }
+        50% { opacity: 1; transform: translateX(3px); }
+      }
+      @keyframes swipeBar {
+        0% { background-position: 100% 0; }
+        100% { background-position: -100% 0; }
+      }
+      .swipe-cue-label {
+        font-family: 'DM Mono', monospace;
+        font-size: 0.55rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--silver-dim);
+      }
+      .guide-swipe-cue.hidden { display: none; }
+
       /* Dot indicators below the track */
       .guide-mobile-dots {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 8px;
-        margin-top: 1.5rem;
-        padding-top: 1rem;
+        padding: 0.85rem 0;
         border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 1rem;
+      }
+      #guide-mobile-dots-bottom {
+        margin-top: 1rem;
+        margin-bottom: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: none;
       }
       .gm-dot {
         width: 6px; height: 6px;
@@ -854,6 +916,25 @@
         <div class="g-step" data-step="4" onclick="gStep(4)"><div class="g-step-num">5</div>What to look for</div>
       </div>
 
+      <!-- Mobile dot indicators TOP + swipe hint -->
+      <div class="guide-mobile-dots" id="guide-mobile-dots-top">
+        <div class="gm-dot active"></div>
+        <div class="gm-dot"></div>
+        <div class="gm-dot"></div>
+        <div class="gm-dot"></div>
+        <div class="gm-dot"></div>
+      </div>
+      <div class="guide-swipe-cue" id="guide-swipe-cue">
+        <div class="swipe-cue-inner">
+          <div class="swipe-cue-arrows">
+            <span class="sca sca-l">&#x2190;</span>
+            <span class="sca-bar"></span>
+            <span class="sca sca-r">&#x2192;</span>
+          </div>
+          <div class="swipe-cue-label">Swipe to explore</div>
+        </div>
+      </div>
+
       <!-- Panel 1: Why Church -->
       <div class="guide-panels-track" id="guide-track">
       <div class="g-panel active" id="gp-0">
@@ -1012,8 +1093,8 @@
 
       </div> <!-- end guide-panels-track -->
 
-      <!-- Mobile dot indicators -->
-      <div class="guide-mobile-dots" id="guide-mobile-dots">
+      <!-- Mobile dot indicators BOTTOM -->
+      <div class="guide-mobile-dots" id="guide-mobile-dots-bottom">
         <div class="gm-dot active"></div>
         <div class="gm-dot"></div>
         <div class="gm-dot"></div>
@@ -1284,11 +1365,19 @@
 
     // Mobile horizontal swipe: update dots on scroll
     const track = document.getElementById('guide-track');
-    const dots = document.querySelectorAll('.gm-dot');
-    if (track && dots.length) {
+    const dotsTop = document.querySelectorAll('#guide-mobile-dots-top .gm-dot');
+    const dotsBot = document.querySelectorAll('#guide-mobile-dots-bottom .gm-dot');
+    const swipeCue = document.getElementById('guide-swipe-cue');
+    let hasSwiped = false;
+    if (track) {
       track.addEventListener('scroll', () => {
         const idx = Math.round(track.scrollLeft / track.offsetWidth);
-        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        dotsTop.forEach((d, i) => d.classList.toggle('active', i === idx));
+        dotsBot.forEach((d, i) => d.classList.toggle('active', i === idx));
+        if (!hasSwiped && track.scrollLeft > 10) {
+          hasSwiped = true;
+          if (swipeCue) swipeCue.classList.add('hidden');
+        }
       }, { passive: true });
     }
   </script>
