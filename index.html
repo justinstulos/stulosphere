@@ -389,45 +389,39 @@
     .expect-item.open .expect-body { display: block; }
 
     /* FIND YOURS */
-    .findyours-intro { margin-bottom: 2rem; }
-    .fy-question-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
-    .fy-opts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 2rem; }
-    .fy-opt {
-      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 400;
-      text-align: left; padding: 1rem 1.25rem;
-      background: #1a2030; border: 1px solid rgba(184,198,220,0.18);
-      color: var(--silver-mid); cursor: pointer;
-      transition: all 0.2s ease;
+    .fy-tagline { font-size: 1.15rem; color: var(--silver); line-height: 1.75; margin-bottom: 2.5rem; max-width: 540px; }
+    .fy-search-block { margin-bottom: 2rem; }
+    .fy-search-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .fy-search-row { display: flex; gap: 0; margin-bottom: 0.6rem; }
+    .fy-input {
+      flex: 1; font-family: 'DM Sans', sans-serif; font-size: 1rem;
+      padding: 0.85rem 1.1rem; background: #1a2030;
+      border: 1px solid rgba(184,198,220,0.25); border-right: none;
+      color: var(--white); outline: none; transition: border-color 0.2s ease;
     }
-    .fy-opt:hover { border-color: rgba(184,198,220,0.45); color: var(--white); background: #1e2638; }
-    .fy-opt-selected { border-color: var(--accent) !important; color: var(--white) !important; background: rgba(184,198,220,0.08) !important; }
-    .fy-response { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, opacity 0.4s ease; opacity: 0; }
-    .fy-response-show { max-height: 200px; opacity: 1; }
-    .fy-response-text {
-      font-family: 'Playfair Display', serif; 
-      font-size: 1.05rem; line-height: 1.85; color: var(--silver);
-      border-left: 2px solid var(--accent); padding-left: 1.25rem;
-      margin-bottom: 2.5rem;
+    .fy-input::placeholder { color: var(--silver-dim); }
+    .fy-input:focus { border-color: rgba(184,198,220,0.5); }
+    .fy-go-btn {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.85rem 1.5rem;
+      background: var(--white); color: var(--bg);
+      border: 1px solid var(--white); cursor: pointer;
+      transition: background 0.2s ease; white-space: nowrap;
     }
+    .fy-go-btn:hover { background: var(--silver); }
+    .fy-search-note { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--silver-dim); }
+    .fy-divider { height: 1px; background: rgba(184,198,220,0.12); margin: 2.5rem 0; }
     .fy-steps { margin-bottom: 2rem; }
-    .fy-steps-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--silver-mid); margin-bottom: 1.25rem; }
-    .fy-step-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
-    .fy-step { display: grid; grid-template-columns: 36px 1fr; gap: 1.25rem; padding: 1.25rem 0; border-bottom: 1px solid var(--line); align-items: start; }
-    .fy-step-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; color: var(--silver-dim); padding-top: 0.2rem; }
+    .fy-steps-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--silver-mid); margin-bottom: 1.25rem; }
+    .fy-step-list { display: flex; flex-direction: column; border-top: 1px solid rgba(184,198,220,0.12); }
+    .fy-step { display: grid; grid-template-columns: 36px 1fr; gap: 1.25rem; padding: 1.25rem 0; border-bottom: 1px solid rgba(184,198,220,0.12); align-items: start; }
+    .fy-step-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; color: var(--accent); padding-top: 0.2rem; }
     .fy-step-title { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; color: var(--white); margin-bottom: 0.3rem; }
     .fy-step-desc { font-size: 0.95rem; line-height: 1.75; color: var(--silver-mid); }
-    .fy-search-btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-family: 'DM Mono', monospace; font-size: 0.72rem;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--bg); background: var(--white);
-      padding: 0.9rem 2rem; text-decoration: none;
-      transition: background 0.2s ease;
-      margin-bottom: 2rem; display: block; text-align: center;
-    }
-    .fy-search-btn:hover { background: var(--silver); }
     @media (max-width: 768px) {
-      .fy-opt { font-size: 0.95rem; padding: 0.9rem 1rem; }
+      .fy-search-row { flex-direction: column; gap: 8px; }
+      .fy-input { border-right: 1px solid rgba(184,198,220,0.25); }
+      .fy-go-btn { width: 100%; }
       .fy-step { grid-template-columns: 28px 1fr; gap: 1rem; }
     }
 
@@ -845,48 +839,39 @@
 
       <!-- Panel 4: Find Yours -->
       <div class="g-panel" id="gp-3">
-        <div class="findyours-intro">
-          <p class="quiz-intro">Wherever you're starting from, the next step is the same: show up. Here's how to make that happen.</p>
+
+        <p class="fy-tagline">The best church for you is one you'll actually go to. Start with what's near.</p>
+
+        <div class="fy-search-block">
+          <div class="fy-search-label">Search churches near you</div>
+          <div class="fy-search-row">
+            <input class="fy-input" id="fyInput" type="text" placeholder="City, zip code, or neighborhood" />
+            <button class="fy-go-btn" onclick="fySearch()">Search &#x2197;</button>
+          </div>
+          <div class="fy-search-note">Opens Google Maps with churches near your location.</div>
         </div>
 
-        <div class="fy-question-label">Where are you right now?</div>
-        <div class="fy-opts">
-          <button class="fy-opt" onclick="showFyResponse(0)">I've never been to church</button>
-          <button class="fy-opt" onclick="showFyResponse(1)">I used to go but walked away</button>
-          <button class="fy-opt" onclick="showFyResponse(2)">I'm new to an area</button>
-          <button class="fy-opt" onclick="showFyResponse(3)">I'm actively searching right now</button>
-        </div>
-
-        <div class="fy-response" id="fy-response">
-          <div class="fy-response-text" id="fy-response-text"></div>
-        </div>
+        <div class="fy-divider"></div>
 
         <div class="fy-steps">
-          <div class="fy-steps-label">Your next steps this week</div>
+          <div class="fy-steps-label">Once you have somewhere to go</div>
           <div class="fy-step-list">
             <div class="fy-step">
               <div class="fy-step-num">1</div>
-              <div class="fy-step-body">
-                <div class="fy-step-title">Find a church near you</div>
-                <div class="fy-step-desc">Proximity matters more than you think. Start with what's within reach. Use the button below to search your area.</div>
-              </div>
-            </div>
-            <div class="fy-step">
-              <div class="fy-step-num">2</div>
               <div class="fy-step-body">
                 <div class="fy-step-title">Visit once before deciding anything</div>
                 <div class="fy-step-desc">Sit wherever you want. You don't have to talk to anyone. You're not committing to anything by showing up. Just go.</div>
               </div>
             </div>
             <div class="fy-step">
-              <div class="fy-step-num">3</div>
+              <div class="fy-step-num">2</div>
               <div class="fy-step-body">
                 <div class="fy-step-title">Go back a second time</div>
                 <div class="fy-step-desc">One visit rarely tells the full story. Give it at least two before forming an opinion. Most churches take a few weeks to feel familiar.</div>
               </div>
             </div>
             <div class="fy-step">
-              <div class="fy-step-num">4</div>
+              <div class="fy-step-num">3</div>
               <div class="fy-step-body">
                 <div class="fy-step-title">Ask a question</div>
                 <div class="fy-step-desc">Most churches have a welcome team or a pastor available after the service. No question is too basic. A healthy church will be glad you asked.</div>
@@ -894,10 +879,6 @@
             </div>
           </div>
         </div>
-
-        <a class="fy-search-btn" href="https://www.google.com/maps/search/church+near+me" target="_blank" rel="noopener">
-          Find churches near me &#x2197;
-        </a>
 
         <div class="g-nav">
           <button class="g-nav-btn" onclick="gStep(2)">&#x2190; Back</button>
@@ -1131,20 +1112,14 @@
       {icon:"📍",title:"How do I know if it's the right church?",body:"Visit a few times before deciding. Pay attention to how people treat each other, whether the Bible is central, and whether you feel welcome. A healthy church will be warm but not pushy. Trust your instincts and keep coming back."}
     ];
 
-    const fyResponses = [
-      "Church might feel foreign and that's okay. Nobody is born knowing how this works. You don't need to believe everything, understand the liturgy, or know when to sit and stand. You just need to show up. The church has always been full of people who started exactly where you are.",
-      "Something drew you here, and that matters. Walking back into a church after time away can feel strange, even heavy. But the door is open. You don't need to explain where you've been. A healthy church isn't looking for perfect people. It never has.",
-      "Starting fresh in a new place is hard, and finding community is one of the hardest parts. A local church is one of the few places where you can walk in as a stranger and leave with people who will actually show up for you. Give it time. Roots take a few months to form.",
-      "The fact that you're searching is significant. Most people never get this far. The next step isn't finding the perfect church. It's finding a real one. Use this guide, visit one nearby, and trust that the searching itself is part of the story."
-    ];
-
-    function showFyResponse(idx) {
-      document.querySelectorAll('.fy-opt').forEach((b,i) => b.classList.toggle('fy-opt-selected', i===idx));
-      const box = document.getElementById('fy-response');
-      const txt = document.getElementById('fy-response-text');
-      txt.textContent = fyResponses[idx];
-      box.classList.add('fy-response-show');
+    function fySearch() {
+      const val = document.getElementById('fyInput').value.trim();
+      const query = val ? 'churches near ' + val : 'church near me';
+      window.open('https://www.google.com/maps/search/' + encodeURIComponent(query), '_blank');
     }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && document.activeElement.id === 'fyInput') fySearch();
+    });
 
     function gStep(n) {
       document.querySelectorAll('.g-panel').forEach((p,i)=>p.classList.toggle('active',i===n));
