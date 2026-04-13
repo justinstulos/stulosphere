@@ -388,6 +388,7 @@
     .expect-item.open .expect-caret { transform: rotate(180deg); }
     .expect-item.open .expect-body { display: block; }
 
+    .guide-mobile-dots { display: none; }
     .g-panel-label { display: none; }
 
     /* FIND YOURS */
@@ -622,27 +623,74 @@
       /* Hide step nav bar on mobile */
       .guide-steps { display: none; }
 
-      /* All panels visible, stacked for natural scroll */
-      .g-panel { display: block !important; }
+      /* Outer wrap clips the track */
+      .guide-wrap { width: 100%; overflow: hidden; }
 
-      /* Each panel becomes a scroll section with a sticky label */
-      .g-panel { position: relative; padding-bottom: 3rem; border-bottom: 1px solid var(--line); margin-bottom: 3rem; }
-      .g-panel:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+      /* Horizontal snap scroll track */
+      .guide-panels-track {
+        display: flex;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .guide-panels-track::-webkit-scrollbar { display: none; }
 
-      /* Sticky step label that sits at top of each section as you scroll */
+      /* Each panel is one full-width snap slide */
+      .g-panel {
+        display: block !important;
+        flex: 0 0 100%;
+        width: 100%;
+        scroll-snap-align: start;
+        padding-bottom: 1rem;
+      }
+
+      /* Step label at top of each slide */
       .g-panel-label {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         font-family: 'DM Mono', monospace;
         font-size: 0.6rem;
         letter-spacing: 0.22em;
         text-transform: uppercase;
         color: var(--accent);
         margin-bottom: 1.5rem;
-        padding: 0.5rem 0;
+        padding-bottom: 0.75rem;
         border-bottom: 1px solid rgba(184,198,220,0.12);
       }
+      .g-panel-label span {
+        font-family: 'DM Mono', monospace;
+        font-size: 0.55rem;
+        color: var(--silver-dim);
+        letter-spacing: 0.1em;
+      }
 
-      /* Hide back/next nav buttons on mobile */
+      /* Dot indicators below the track */
+      .guide-mobile-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--line);
+      }
+      .gm-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: var(--silver-faint);
+        border: 1px solid var(--silver-dim);
+        transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+        flex-shrink: 0;
+      }
+      .gm-dot.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        transform: scale(1.4);
+      }
+
+      /* Hide back/next nav buttons — swiping replaces them */
       .g-nav { display: none; }
 
       /* Why cards: single column, tappable */
@@ -807,8 +855,9 @@
       </div>
 
       <!-- Panel 1: Why Church -->
+      <div class="guide-panels-track" id="guide-track">
       <div class="g-panel active" id="gp-0">
-        <div class="g-panel-label">01 — Why Church</div>
+        <div class="g-panel-label">Why Church <span>1 of 5</span></div>
         <div class="why-grid">
           <div class="why-card" onclick="toggleWhy(this,0)">
             <div class="why-card-label">Community</div>
@@ -841,9 +890,8 @@
         </div>
       </div>
 
-      <!-- Panel 2: Traditions -->
       <div class="g-panel" id="gp-1">
-        <div class="g-panel-label">02 — Traditions</div>
+        <div class="g-panel-label">Traditions <span>2 of 5</span></div>
         <div class="trad-tabs" id="trad-tabs"></div>
         <div class="trad-card" id="trad-card"></div>
         <div class="g-nav">
@@ -852,9 +900,8 @@
         </div>
       </div>
 
-      <!-- Panel 3: What to Expect -->
       <div class="g-panel" id="gp-2">
-        <div class="g-panel-label">03 — What to Expect</div>
+        <div class="g-panel-label">What to Expect <span>3 of 5</span></div>
         <div class="expect-items" id="expect-items"></div>
         <div class="g-nav">
           <button class="g-nav-btn" onclick="gStep(1)">&#x2190; Back</button>
@@ -862,9 +909,8 @@
         </div>
       </div>
 
-      <!-- Panel 4: Find Yours -->
       <div class="g-panel" id="gp-3">
-        <div class="g-panel-label">04 — Find Yours</div>
+        <div class="g-panel-label">Find Yours <span>4 of 5</span></div>
         <p class="fy-tagline">The best church for you is one you'll actually go to. Start with what's near.</p>
 
         <div class="fy-search-block">
@@ -912,9 +958,8 @@
         </div>
       </div>
 
-      <!-- Panel 5: What to Look For -->
       <div class="g-panel" id="gp-4">
-        <div class="g-panel-label">05 — What to Look For</div>
+        <div class="g-panel-label">What to Look For <span>5 of 5</span></div>
         <p class="quiz-intro">Tradition is a starting point, not a guarantee. Here are five marks of a healthy, biblical church. Use these when you visit.</p>
         <div class="marks-list">
           <div class="mark-item">
@@ -963,6 +1008,17 @@
           <button class="g-nav-btn" onclick="gStep(3)">&#x2190; Back</button>
           <a class="g-nav-btn primary" href="https://www.google.com/maps/search/church+near+me" target="_blank" rel="noopener">Find churches near me &#x2197;</a>
         </div>
+      </div>
+
+      </div> <!-- end guide-panels-track -->
+
+      <!-- Mobile dot indicators -->
+      <div class="guide-mobile-dots" id="guide-mobile-dots">
+        <div class="gm-dot active"></div>
+        <div class="gm-dot"></div>
+        <div class="gm-dot"></div>
+        <div class="gm-dot"></div>
+        <div class="gm-dot"></div>
       </div>
 
     </div>
@@ -1225,6 +1281,16 @@
 
     buildTradTabs();
     buildExpect();
+
+    // Mobile horizontal swipe: update dots on scroll
+    const track = document.getElementById('guide-track');
+    const dots = document.querySelectorAll('.gm-dot');
+    if (track && dots.length) {
+      track.addEventListener('scroll', () => {
+        const idx = Math.round(track.scrollLeft / track.offsetWidth);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }, { passive: true });
+    }
   </script>
 </body>
 </html>
