@@ -388,6 +388,8 @@
     .expect-item.open .expect-caret { transform: rotate(180deg); }
     .expect-item.open .expect-body { display: block; }
 
+    .guide-swipe-hint { display: none; }
+
     /* FIND YOURS */
     .fy-tagline { font-size: 1.15rem; color: var(--silver); line-height: 1.75; margin-bottom: 2.5rem; max-width: 540px; }
     .fy-search-block { margin-bottom: 2rem; }
@@ -615,6 +617,16 @@
       .guide-subheading { font-size: 0.95rem; }
       .guide-wrap { width: 100%; overflow: hidden; }
 
+      .guide-swipe-hint {
+        display: block;
+        font-family: 'DM Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+        color: var(--accent);
+        margin-top: 1rem;
+        text-align: center;
+      }
+
       /* Step nav: pill row, scrollable */
       .guide-steps {
         display: flex;
@@ -770,8 +782,9 @@
     </div>
     <div class="guide-intro reveal">
       <h2 class="guide-heading">Your guide to finding<br><span>the right church.</span></h2>
-      <p class="guide-subheading">Work through the five steps below, tap each section to explore.</p>
-      <div class="guide-interactive-badge">&#x2194; Interactive Guide</div>
+      <p class="guide-subheading">Work through five steps to find the right church for you. Use the step buttons to move forward.</p>
+      <div class="guide-interactive-badge">&#x2194; 5-Step Interactive Guide</div>
+      <p class="guide-swipe-hint">&#x261F; Tap a numbered step below to get started</p>
     </div>
     <div class="guide-wrap reveal">
 
