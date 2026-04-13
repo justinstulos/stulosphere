@@ -451,7 +451,7 @@
         margin-left: 0.5rem;
       }
       .mark-item.open .mark-caret { transform: rotate(180deg); }
-      .mark-desc { font-size: 0.95rem; display: none; margin-top: 0.6rem; }
+      .mark-desc { font-size: 0.95rem; display: none; margin-top: 0.6rem; font-family: 'DM Sans', sans-serif; font-weight: 300; color: var(--silver-mid); }
       .mark-item.open .mark-desc { display: block; }
       .mark-ref { margin-bottom: 0; }
       .mark-item.open .mark-ref { margin-bottom: 0.6rem; }
@@ -947,7 +947,7 @@
 
       <!-- Panel 1: Why Church -->
       <div class="guide-panels-track" id="guide-track">
-      <div class="g-panel active" id="gp-0">
+      <div class="g-panel active" id="gp-0"><div class="g-panel-inner">
         <div class="g-panel-label">Why Church <span>1 of 5</span></div>
         <div class="why-grid">
           <div class="why-card" onclick="toggleWhy(this,0)">
@@ -979,9 +979,9 @@
         <div class="g-nav">
           <button class="g-nav-btn primary" onclick="gStep(1)">Explore traditions &#x2192;</button>
         </div>
-      </div>
+      </div></div>
 
-      <div class="g-panel" id="gp-1">
+      <div class="g-panel" id="gp-1"><div class="g-panel-inner">
         <div class="g-panel-label">Traditions <span>2 of 5</span></div>
         <div class="trad-tabs" id="trad-tabs"></div>
         <div class="trad-card" id="trad-card"></div>
@@ -989,18 +989,18 @@
           <button class="g-nav-btn" onclick="gStep(0)">&#x2190; Back</button>
           <button class="g-nav-btn primary" onclick="gStep(2)">What to expect &#x2192;</button>
         </div>
-      </div>
+      </div></div>
 
-      <div class="g-panel" id="gp-2">
+      <div class="g-panel" id="gp-2"><div class="g-panel-inner">
         <div class="g-panel-label">What to Expect <span>3 of 5</span></div>
         <div class="expect-items" id="expect-items"></div>
         <div class="g-nav">
           <button class="g-nav-btn" onclick="gStep(1)">&#x2190; Back</button>
           <button class="g-nav-btn primary" onclick="gStep(3)">Find yours &#x2192;</button>
         </div>
-      </div>
+      </div></div>
 
-      <div class="g-panel" id="gp-3">
+      <div class="g-panel" id="gp-3"><div class="g-panel-inner">
         <div class="g-panel-label">Find Yours <span>4 of 5</span></div>
         <p class="fy-tagline">The best church for you is one you'll actually go to. Start with what's near.</p>
 
@@ -1047,9 +1047,9 @@
           <button class="g-nav-btn" onclick="gStep(2)">&#x2190; Back</button>
           <button class="g-nav-btn primary" onclick="gStep(4)">What to look for &#x2192;</button>
         </div>
-      </div>
+      </div></div>
 
-      <div class="g-panel" id="gp-4">
+      <div class="g-panel" id="gp-4"><div class="g-panel-inner">
         <div class="g-panel-label">What to Look For <span>5 of 5</span></div>
         <p class="quiz-intro">Tradition is a starting point, not a guarantee. Here are five marks of a healthy, biblical church. Use these when you visit.</p>
         <div class="marks-list">
@@ -1099,7 +1099,7 @@
           <button class="g-nav-btn" onclick="gStep(3)">&#x2190; Back</button>
           <a class="g-nav-btn primary" href="https://www.google.com/maps/search/church+near+me" target="_blank" rel="noopener">Find churches near me &#x2197;</a>
         </div>
-      </div>
+      </div></div>
 
       </div> <!-- end guide-panels-track -->
 
@@ -1315,7 +1315,10 @@
         const inl = card.querySelector('.why-expand-inline');
         if (inl) {
           inl.textContent = whyDetails[idx];
-          setTimeout(() => inl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+          setTimeout(() => {
+            inl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            fitTrackToPanel(0);
+          }, 50);
         }
       }
     }
@@ -1364,6 +1367,9 @@
     function toggleMark(item) {
       if (window.innerWidth > 768) return;
       item.classList.toggle('open');
+      // Refit track height after expand/collapse
+      const idx = Math.round(track.scrollLeft / track.offsetWidth);
+      setTimeout(() => fitTrackToPanel(idx), 10);
     }
 
     buildTradTabs();
@@ -1379,9 +1385,10 @@
 
     function fitTrackToPanel(idx) {
       if (window.innerWidth > 768) return;
-      const panels = track.querySelectorAll('.g-panel');
+      const panels = track ? track.querySelectorAll('.g-panel') : [];
       if (panels[idx]) {
-        track.style.height = panels[idx].scrollHeight + 'px';
+        const inner = panels[idx].querySelector('.g-panel-inner');
+        track.style.height = (inner ? inner.offsetHeight : panels[idx].scrollHeight) + 'px';
       }
     }
 
