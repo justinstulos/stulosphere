@@ -641,7 +641,7 @@
       /* Outer wrap clips the track */
       .guide-wrap { width: 100%; overflow: hidden; }
 
-      /* Horizontal snap scroll track — fixed height, vertical scroll inside each panel */
+      /* Horizontal snap scroll track — height set dynamically by JS */
       .guide-panels-track {
         display: flex;
         overflow-x: scroll;
@@ -649,22 +649,19 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        height: 75vh;
+        transition: height 0.35s ease;
       }
       .guide-panels-track::-webkit-scrollbar { display: none; }
 
-      /* Each panel is one full-width snap slide, scrolls vertically inside */
+      /* Each panel is one full-width snap slide */
       .g-panel {
         display: block !important;
         flex: 0 0 100%;
         width: 100%;
         scroll-snap-align: start;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow: hidden;
         padding-bottom: 1rem;
-        scrollbar-width: none;
       }
-      .g-panel::-webkit-scrollbar { display: none; }
 
       /* Step label at top of each slide */
       .g-panel-label {
@@ -1371,16 +1368,31 @@
 
     buildTradTabs();
     buildExpect();
+    // Refit after dynamic content renders
+    setTimeout(() => fitTrackToPanel(0), 50);
 
-    // Mobile horizontal swipe: update dots on scroll
+    // Mobile horizontal swipe: update dots and resize track to active panel height
     const track = document.getElementById('guide-track');
     const dotsTop = document.querySelectorAll('#guide-mobile-dots-top .gm-dot');
     const swipeCue = document.getElementById('guide-swipe-cue');
     let hasSwiped = false;
+
+    function fitTrackToPanel(idx) {
+      if (window.innerWidth > 768) return;
+      const panels = track.querySelectorAll('.g-panel');
+      if (panels[idx]) {
+        track.style.height = panels[idx].scrollHeight + 'px';
+      }
+    }
+
     if (track) {
+      // Set initial height
+      fitTrackToPanel(0);
+
       track.addEventListener('scroll', () => {
         const idx = Math.round(track.scrollLeft / track.offsetWidth);
         dotsTop.forEach((d, i) => d.classList.toggle('active', i === idx));
+        fitTrackToPanel(idx);
         if (!hasSwiped && track.scrollLeft > 10) {
           hasSwiped = true;
           if (swipeCue) swipeCue.classList.add('hidden');
