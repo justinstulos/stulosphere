@@ -631,38 +631,31 @@
       .guide-intro { text-align: center; margin-bottom: 2.5rem; }
       .guide-heading { font-size: clamp(1.5rem, 6vw, 2rem); }
       .guide-subheading { font-size: 0.95rem; }
-      .guide-wrap { width: 100%; overflow: hidden; }
 
       .guide-swipe-hint { display: none; }
 
       /* Hide step nav bar on mobile */
       .guide-steps { display: none; }
 
-      /* Outer wrap — must NOT clip overflow so the track can scroll */
-      .guide-wrap { width: 100%; overflow: visible; }
+      /* Outer wrap clips the sliding track */
+      .guide-wrap { width: 100%; overflow: hidden; }
 
-      /* Horizontal snap scroll track — height set dynamically by JS */
+      /* Track slides via translateX — no scroll involved */
       .guide-panels-track {
         display: flex;
         width: 100%;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        transition: height 0.35s ease;
+        overflow: visible;
+        transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1), height 0.35s ease;
+        will-change: transform;
       }
-      .guide-panels-track::-webkit-scrollbar { display: none; }
 
-      /* Each panel is one full-width snap slide */
+      /* Each panel is one full-width slide */
       .g-panel {
         display: block !important;
         flex: 0 0 100%;
         width: 100%;
         min-width: 100%;
-        scroll-snap-align: start;
-        overflow-x: hidden;
-        overflow-y: hidden;
+        overflow: hidden;
         padding-bottom: 1rem;
         box-sizing: border-box;
       }
@@ -1292,24 +1285,94 @@
 
     const stepNames = ['Why Church','Traditions','What to Expect','Find Yours','What to Look For'];
 
+    // ── Slider state ──────────────────────────────────────────────
+    const track     = document.getElementById('guide-track');
+    const dotsTop   = document.querySelectorAll('#guide-mobile-dots-top .gm-dot');
+    const swipeCue  = document.getElementById('guide-swipe-cue');
+    const TOTAL     = 5;
+    let   currentStep = 0;
+    let   hasSwiped   = false;
+
+    function isMobile() { return window.innerWidth <= 768; }
+
+    // Move slider to step n (mobile: transform; desktop: class toggle)
     function gStep(n) {
-      document.querySelectorAll('.g-panel').forEach((p,i)=>p.classList.toggle('active',i===n));
-      document.querySelectorAll('.g-step').forEach((s,i)=>{
-        s.classList.toggle('active',i===n);
-        s.classList.toggle('done',i<n);
-        s.querySelector('.g-step-num').textContent = i<n ? '✓' : i+1;
+      n = Math.max(0, Math.min(TOTAL - 1, n));
+      currentStep = n;
+
+      // Always update panel active classes (desktop uses these)
+      document.querySelectorAll('.g-panel').forEach((p,i) => p.classList.toggle('active', i === n));
+      document.querySelectorAll('.g-step').forEach((s,i) => {
+        s.classList.toggle('active', i === n);
+        s.classList.toggle('done',   i < n);
+        s.querySelector('.g-step-num').textContent = i < n ? '✓' : i + 1;
       });
-      // On mobile, physically scroll the track to the correct panel
-      if (track && window.innerWidth <= 768) {
-        const panelWidth = track.offsetWidth;
-        track.scrollTo({ left: n * panelWidth, behavior: 'smooth' });
+
+      if (isMobile() && track) {
+        // Slide via transform — zero scroll, zero snap conflicts
+        track.style.transform = `translateX(-${n * 100}%)`;
+        // Update dots
         dotsTop.forEach((d, i) => d.classList.toggle('active', i === n));
+        // Update height to match new panel
         fitTrackToPanel(n);
+        // Hide swipe cue once user navigates
+        if (n > 0 && !hasSwiped) {
+          hasSwiped = true;
+          if (swipeCue) swipeCue.classList.add('hidden');
+        }
       }
     }
 
+    // Resize track height to match current panel's content
+    function fitTrackToPanel(idx) {
+      if (!isMobile() || !track) return;
+      const panels = track.querySelectorAll('.g-panel');
+      if (panels[idx]) {
+        const inner = panels[idx].querySelector('.g-panel-inner');
+        const h = inner ? inner.offsetHeight : panels[idx].scrollHeight;
+        track.style.height = h + 'px';
+      }
+    }
+
+    // ── Touch swipe detection ─────────────────────────────────────
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let swiping = false;
+
+    if (track) {
+      track.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        swiping = false;
+      }, { passive: true });
+
+      track.addEventListener('touchmove', e => {
+        if (!isMobile()) return;
+        const dx = e.touches[0].clientX - touchStartX;
+        const dy = e.touches[0].clientY - touchStartY;
+        // Only intercept horizontal swipes
+        if (!swiping && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) {
+          swiping = true;
+        }
+        if (swiping) e.preventDefault(); // stop page scroll during horizontal swipe
+      }, { passive: false });
+
+      track.addEventListener('touchend', e => {
+        if (!isMobile() || !swiping) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const THRESHOLD = 50; // px needed to trigger a slide
+        if (dx < -THRESHOLD && currentStep < TOTAL - 1) {
+          gStep(currentStep + 1);
+        } else if (dx > THRESHOLD && currentStep > 0) {
+          gStep(currentStep - 1);
+        }
+        swiping = false;
+      }, { passive: true });
+    }
+
+    // ── Content builders ──────────────────────────────────────────
     function toggleWhy(card, idx) {
-      const exp = document.getElementById('why-exp');
+      const exp  = document.getElementById('why-exp');
       const open = card.classList.contains('selected');
       document.querySelectorAll('.why-card').forEach(c => {
         c.classList.remove('selected');
@@ -1320,15 +1383,13 @@
       card.classList.add('selected');
       exp.textContent = whyDetails[idx];
       exp.classList.add('show');
-      // On mobile: populate the inline blurb and scroll it into view
-      const isMobile = window.innerWidth <= 768;
-      if (isMobile) {
+      if (isMobile()) {
         const inl = card.querySelector('.why-expand-inline');
         if (inl) {
           inl.textContent = whyDetails[idx];
           setTimeout(() => {
             inl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            fitTrackToPanel(0);
+            fitTrackToPanel(currentStep);
           }, 50);
         }
       }
@@ -1358,6 +1419,7 @@
           <button class="trad-nav-btn" onclick="showTrad(${(idx-1+traditions.length)%traditions.length})">&#x2190; Previous</button>
           <button class="trad-nav-btn" onclick="showTrad(${(idx+1)%traditions.length})">Next &#x2192;</button>
         </div>`;
+      setTimeout(() => fitTrackToPanel(currentStep), 50);
     }
 
     function buildExpect() {
@@ -1373,51 +1435,19 @@
 
     function toggleExpect(i) {
       document.getElementById('ei-'+i).classList.toggle('open');
+      setTimeout(() => fitTrackToPanel(currentStep), 10);
     }
 
     function toggleMark(item) {
-      if (window.innerWidth > 768) return;
+      if (!isMobile()) return;
       item.classList.toggle('open');
-      // Refit track height after expand/collapse
-      const idx = Math.round(track.scrollLeft / track.offsetWidth);
-      setTimeout(() => fitTrackToPanel(idx), 10);
+      setTimeout(() => fitTrackToPanel(currentStep), 10);
     }
 
+    // ── Init ──────────────────────────────────────────────────────
     buildTradTabs();
     buildExpect();
-    // Refit after dynamic content renders
-    setTimeout(() => fitTrackToPanel(0), 50);
-
-    // Mobile horizontal swipe: update dots and resize track to active panel height
-    const track = document.getElementById('guide-track');
-    const dotsTop = document.querySelectorAll('#guide-mobile-dots-top .gm-dot');
-    const swipeCue = document.getElementById('guide-swipe-cue');
-    let hasSwiped = false;
-
-    function fitTrackToPanel(idx) {
-      if (window.innerWidth > 768) return;
-      const panels = track ? track.querySelectorAll('.g-panel') : [];
-      if (panels[idx]) {
-        const inner = panels[idx].querySelector('.g-panel-inner');
-        track.style.height = (inner ? inner.offsetHeight : panels[idx].scrollHeight) + 'px';
-      }
-    }
-
-    if (track) {
-      // Set initial height
-      fitTrackToPanel(0);
-
-      track.addEventListener('scroll', () => {
-        const idx = Math.round(track.scrollLeft / track.offsetWidth);
-        dotsTop.forEach((d, i) => d.classList.toggle('active', i === idx));
-        document.querySelectorAll('.g-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
-        fitTrackToPanel(idx);
-        if (!hasSwiped && track.scrollLeft > 10) {
-          hasSwiped = true;
-          if (swipeCue) swipeCue.classList.add('hidden');
-        }
-      }, { passive: true });
-    }
+    setTimeout(() => fitTrackToPanel(0), 100);
   </script>
 </body>
 </html>
