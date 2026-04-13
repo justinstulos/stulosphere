@@ -434,13 +434,27 @@
     .mark-item:first-child { border-top: 1px solid var(--line); }
     .mark-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; color: var(--silver-dim); padding-top: 0.3rem; }
     .mark-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; line-height: 1.2; }
+    .mark-caret { display: none; }
     .mark-ref { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.75rem; }
     .mark-desc { font-size: 1rem; line-height: 1.85; color: var(--silver-mid); }
     .marks-note { font-family: 'Playfair Display', serif;  font-size: 1rem; line-height: 1.8; color: var(--silver-dim); border-left: 2px solid var(--silver-faint); padding-left: 1.25rem; margin-bottom: 2rem; }
     @media (max-width: 768px) {
-      .mark-item { grid-template-columns: 36px 1fr; gap: 1rem; padding: 1.5rem 0; }
-      .mark-title { font-size: 1.05rem; }
-      .mark-desc { font-size: 0.95rem; }
+      .mark-item { grid-template-columns: 36px 1fr; gap: 1rem; padding: 1.25rem 0; cursor: pointer; }
+      .mark-title { font-size: 1.05rem; display: flex; justify-content: space-between; align-items: center; }
+      .mark-caret {
+        display: inline-block;
+        font-family: 'DM Mono', monospace;
+        font-size: 0.55rem;
+        color: var(--accent);
+        transition: transform 0.25s ease;
+        flex-shrink: 0;
+        margin-left: 0.5rem;
+      }
+      .mark-item.open .mark-caret { transform: rotate(180deg); }
+      .mark-desc { font-size: 0.95rem; display: none; margin-top: 0.6rem; }
+      .mark-item.open .mark-desc { display: block; }
+      .mark-ref { margin-bottom: 0; }
+      .mark-item.open .mark-ref { margin-bottom: 0.6rem; }
     }
 
     /* GUIDE NAV */
@@ -613,7 +627,7 @@
       .gap-us { font-size: 1rem; text-align: center; color: var(--white); }
 
       /* --- Find a Church: redesigned for mobile --- */
-      .section-guide { padding: 4.5rem 1.25rem; align-items: stretch; }
+      .section-guide { padding: 4.5rem 1.25rem 2rem; align-items: stretch; }
       .guide-intro { text-align: center; margin-bottom: 2.5rem; }
       .guide-heading { font-size: clamp(1.5rem, 6vw, 2rem); }
       .guide-subheading { font-size: 0.95rem; }
@@ -1036,42 +1050,42 @@
         <div class="g-panel-label">What to Look For <span>5 of 5</span></div>
         <p class="quiz-intro">Tradition is a starting point, not a guarantee. Here are five marks of a healthy, biblical church. Use these when you visit.</p>
         <div class="marks-list">
-          <div class="mark-item">
+          <div class="mark-item" onclick="toggleMark(this)">
             <div class="mark-num">01</div>
             <div class="mark-body">
-              <div class="mark-title">The gospel is preached clearly</div>
+              <div class="mark-title">The gospel is preached clearly <span class="mark-caret">&#9650;</span></div>
               <div class="mark-ref">1 Corinthians 15:3–4</div>
               <p class="mark-desc">Every sermon should point to Christ crucified and risen. Not just moral advice or life tips. If Jesus is absent from the pulpit, the church has lost its center.</p>
             </div>
           </div>
-          <div class="mark-item">
+          <div class="mark-item" onclick="toggleMark(this)">
             <div class="mark-num">02</div>
             <div class="mark-body">
-              <div class="mark-title">Scripture is the authority</div>
+              <div class="mark-title">Scripture is the authority <span class="mark-caret">&#9650;</span></div>
               <div class="mark-ref">2 Timothy 3:16–17</div>
               <p class="mark-desc">The Bible should shape what the church teaches, not the other way around. A healthy church submits to Scripture even when it's uncomfortable.</p>
             </div>
           </div>
-          <div class="mark-item">
+          <div class="mark-item" onclick="toggleMark(this)">
             <div class="mark-num">03</div>
             <div class="mark-body">
-              <div class="mark-title">The sacraments (or ordinances) are practiced</div>
+              <div class="mark-title">The sacraments (or ordinances) are practiced <span class="mark-caret">&#9650;</span></div>
               <div class="mark-ref">Matthew 28:19, Luke 22:19</div>
               <p class="mark-desc">Baptism and the Lord's Supper should be observed as Christ commanded, not as extras or afterthoughts. They are visible signs of the gospel.</p>
             </div>
           </div>
-          <div class="mark-item">
+          <div class="mark-item" onclick="toggleMark(this)">
             <div class="mark-num">04</div>
             <div class="mark-body">
-              <div class="mark-title">There is real community and accountability</div>
+              <div class="mark-title">There is real community and accountability <span class="mark-caret">&#9650;</span></div>
               <div class="mark-ref">Hebrews 10:24–25</div>
               <p class="mark-desc">People should know each other's names. Look for genuine care, small groups, and a culture where people are honest with one another and show up in hard times.</p>
             </div>
           </div>
-          <div class="mark-item">
+          <div class="mark-item" onclick="toggleMark(this)">
             <div class="mark-num">05</div>
             <div class="mark-body">
-              <div class="mark-title">Leadership is accountable and servant-hearted</div>
+              <div class="mark-title">Leadership is accountable and servant-hearted <span class="mark-caret">&#9650;</span></div>
               <div class="mark-ref">1 Peter 5:2–3</div>
               <p class="mark-desc">Healthy churches have transparent, humble leadership. Be cautious of a church built entirely around one personality, or where leadership is unaccountable to anyone.</p>
             </div>
@@ -1342,6 +1356,11 @@
 
     function toggleExpect(i) {
       document.getElementById('ei-'+i).classList.toggle('open');
+    }
+
+    function toggleMark(item) {
+      if (window.innerWidth > 768) return;
+      item.classList.toggle('open');
     }
 
     buildTradTabs();
