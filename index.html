@@ -1295,6 +1295,12 @@
         s.classList.toggle('done',i<n);
         s.querySelector('.g-step-num').textContent = i<n ? '✓' : i+1;
       });
+      // On mobile, scroll the snap-track to the correct panel
+      if (window.innerWidth <= 768 && track) {
+        track.scrollTo({ left: n * track.offsetWidth, behavior: 'smooth' });
+        dotsTop.forEach((d, i) => d.classList.toggle('active', i === n));
+        fitTrackToPanel(n);
+      }
     }
 
     function toggleWhy(card, idx) {
@@ -1399,6 +1405,8 @@
       track.addEventListener('scroll', () => {
         const idx = Math.round(track.scrollLeft / track.offsetWidth);
         dotsTop.forEach((d, i) => d.classList.toggle('active', i === idx));
+        // Keep g-panel active class in sync with swipe position
+        document.querySelectorAll('.g-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
         fitTrackToPanel(idx);
         if (!hasSwiped && track.scrollLeft > 10) {
           hasSwiped = true;
