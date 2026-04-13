@@ -388,7 +388,7 @@
     .expect-item.open .expect-caret { transform: rotate(180deg); }
     .expect-item.open .expect-body { display: block; }
 
-    .why-expand-inline { display: none; }
+    .g-panel-label { display: none; }
 
     /* FIND YOURS */
     .fy-tagline { font-size: 1.15rem; color: var(--silver); line-height: 1.75; margin-bottom: 2.5rem; max-width: 540px; }
@@ -619,33 +619,31 @@
 
       .guide-swipe-hint { display: none; }
 
-      /* Step nav: pill row, scrollable */
-      .guide-steps {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        flex-wrap: nowrap;
-        gap: 6px;
-        margin-bottom: 2.5rem;
-        padding-bottom: 4px;
-      }
-      .guide-steps::-webkit-scrollbar { display: none; }
-      .g-step {
+      /* Hide step nav bar on mobile */
+      .guide-steps { display: none; }
+
+      /* All panels visible, stacked for natural scroll */
+      .g-panel { display: block !important; }
+
+      /* Each panel becomes a scroll section with a sticky label */
+      .g-panel { position: relative; padding-bottom: 3rem; border-bottom: 1px solid var(--line); margin-bottom: 3rem; }
+      .g-panel:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+      /* Sticky step label that sits at top of each section as you scroll */
+      .g-panel-label {
+        display: block;
+        font-family: 'DM Mono', monospace;
         font-size: 0.6rem;
-        padding: 8px 14px;
-        white-space: nowrap;
-        flex-shrink: 0;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        letter-spacing: 0.1em;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(184,198,220,0.12);
       }
-      .g-step.active { border-color: var(--accent); background: rgba(184,198,220,0.1); }
-      .g-step-num { width: 18px; height: 18px; font-size: 0.55rem; }
-      .g-step-div { width: 12px; flex-shrink: 0; }
+
+      /* Hide back/next nav buttons on mobile */
+      .g-nav { display: none; }
 
       /* Why cards: single column, tappable */
       .why-grid { grid-template-columns: 1fr; gap: 1px; }
@@ -810,6 +808,7 @@
 
       <!-- Panel 1: Why Church -->
       <div class="g-panel active" id="gp-0">
+        <div class="g-panel-label">01 — Why Church</div>
         <div class="why-grid">
           <div class="why-card" onclick="toggleWhy(this,0)">
             <div class="why-card-label">Community</div>
@@ -844,6 +843,7 @@
 
       <!-- Panel 2: Traditions -->
       <div class="g-panel" id="gp-1">
+        <div class="g-panel-label">02 — Traditions</div>
         <div class="trad-tabs" id="trad-tabs"></div>
         <div class="trad-card" id="trad-card"></div>
         <div class="g-nav">
@@ -854,6 +854,7 @@
 
       <!-- Panel 3: What to Expect -->
       <div class="g-panel" id="gp-2">
+        <div class="g-panel-label">03 — What to Expect</div>
         <div class="expect-items" id="expect-items"></div>
         <div class="g-nav">
           <button class="g-nav-btn" onclick="gStep(1)">&#x2190; Back</button>
@@ -863,7 +864,7 @@
 
       <!-- Panel 4: Find Yours -->
       <div class="g-panel" id="gp-3">
-
+        <div class="g-panel-label">04 — Find Yours</div>
         <p class="fy-tagline">The best church for you is one you'll actually go to. Start with what's near.</p>
 
         <div class="fy-search-block">
@@ -913,6 +914,7 @@
 
       <!-- Panel 5: What to Look For -->
       <div class="g-panel" id="gp-4">
+        <div class="g-panel-label">05 — What to Look For</div>
         <p class="quiz-intro">Tradition is a starting point, not a guarantee. Here are five marks of a healthy, biblical church. Use these when you visit.</p>
         <div class="marks-list">
           <div class="mark-item">
