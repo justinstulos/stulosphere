@@ -388,7 +388,8 @@
     .expect-item.open .expect-caret { transform: rotate(180deg); }
     .expect-item.open .expect-body { display: block; }
 
-    .why-expand-inline { display: none; }
+    .guide-dots { display: none; }
+    .guide-step-label { display: none; }
 
     /* FIND YOURS */
     .fy-tagline { font-size: 1.15rem; color: var(--silver); line-height: 1.75; margin-bottom: 2.5rem; max-width: 540px; }
@@ -617,43 +618,48 @@
       .guide-subheading { font-size: 0.95rem; }
       .guide-wrap { width: 100%; overflow: hidden; }
 
-      .guide-swipe-hint {
-        display: block;
-        font-family: 'DM Mono', monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.12em;
-        color: var(--accent);
-        margin-top: 1rem;
-        text-align: center;
+      .guide-swipe-hint { display: none; }
+
+      /* Hide scrollable step pills on mobile — nav is handled by Back/Next buttons */
+      .guide-steps { display: none; }
+
+      /* Progress dots */
+      .guide-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 2rem;
+      }
+      .guide-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: var(--silver-faint);
+        border: 1px solid var(--line-bright);
+        transition: background 0.3s ease, transform 0.3s ease;
+        flex-shrink: 0;
+      }
+      .guide-dot.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        transform: scale(1.3);
+      }
+      .guide-dot.done {
+        background: var(--silver-dim);
+        border-color: var(--silver-dim);
       }
 
-      /* Step nav: pill row, scrollable */
-      .guide-steps {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        flex-wrap: nowrap;
-        gap: 6px;
-        margin-bottom: 2.5rem;
-        padding-bottom: 4px;
+      /* Step label shown above content */
+      .guide-step-label {
+        display: block;
+        font-family: 'DM Mono', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        text-align: center;
+        margin-bottom: 1.5rem;
       }
-      .guide-steps::-webkit-scrollbar { display: none; }
-      .g-step {
-        font-size: 0.6rem;
-        padding: 8px 14px;
-        white-space: nowrap;
-        flex-shrink: 0;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        letter-spacing: 0.1em;
-      }
-      .g-step.active { border-color: var(--accent); background: rgba(184,198,220,0.1); }
-      .g-step-num { width: 18px; height: 18px; font-size: 0.55rem; }
-      .g-step-div { width: 12px; flex-shrink: 0; }
 
       /* Why cards: single column, tappable */
       .why-grid { grid-template-columns: 1fr; gap: 1px; }
@@ -802,6 +808,16 @@
       <p class="guide-swipe-hint">&#x261F; Tap a numbered step below to get started</p>
     </div>
     <div class="guide-wrap reveal">
+
+      <!-- Mobile: progress dots -->
+      <div class="guide-dots">
+        <div class="guide-dot active" id="gdot-0"></div>
+        <div class="guide-dot" id="gdot-1"></div>
+        <div class="guide-dot" id="gdot-2"></div>
+        <div class="guide-dot" id="gdot-3"></div>
+        <div class="guide-dot" id="gdot-4"></div>
+      </div>
+      <div class="guide-step-label" id="guide-step-label">Step 1 of 5 — Why Church</div>
 
       <!-- Step bar -->
       <div class="guide-steps">
@@ -1154,6 +1170,8 @@
       if (e.key === 'Enter' && document.activeElement.id === 'fyInput') fySearch();
     });
 
+    const stepNames = ['Why Church','Traditions','What to Expect','Find Yours','What to Look For'];
+
     function gStep(n) {
       document.querySelectorAll('.g-panel').forEach((p,i)=>p.classList.toggle('active',i===n));
       document.querySelectorAll('.g-step').forEach((s,i)=>{
@@ -1161,6 +1179,17 @@
         s.classList.toggle('done',i<n);
         s.querySelector('.g-step-num').textContent = i<n ? '✓' : i+1;
       });
+      // Update mobile progress dots
+      document.querySelectorAll('.guide-dot').forEach((d,i)=>{
+        d.classList.toggle('active', i===n);
+        d.classList.toggle('done', i<n);
+      });
+      const lbl = document.getElementById('guide-step-label');
+      if (lbl) lbl.textContent = 'Step '+(n+1)+' of 5 — '+stepNames[n];
+      // Scroll guide into view on mobile
+      if (window.innerWidth <= 768) {
+        document.getElementById('guide').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
 
     function toggleWhy(card, idx) {
