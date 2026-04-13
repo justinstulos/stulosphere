@@ -732,13 +732,6 @@
         border-bottom: 1px solid var(--line);
         margin-bottom: 1rem;
       }
-      #guide-mobile-dots-bottom {
-        margin-top: 0.5rem;
-        margin-bottom: 0;
-        padding: 0.6rem 0;
-        border-top: 1px solid var(--line);
-        border-bottom: none;
-      }
       .gm-dot {
         width: 6px; height: 6px;
         border-radius: 50%;
@@ -1093,15 +1086,6 @@
 
       </div> <!-- end guide-panels-track -->
 
-      <!-- Mobile dot indicators BOTTOM -->
-      <div class="guide-mobile-dots" id="guide-mobile-dots-bottom">
-        <div class="gm-dot active"></div>
-        <div class="gm-dot"></div>
-        <div class="gm-dot"></div>
-        <div class="gm-dot"></div>
-        <div class="gm-dot"></div>
-      </div>
-
     </div>
   </section>
 
@@ -1366,14 +1350,12 @@
     // Mobile horizontal swipe: update dots on scroll
     const track = document.getElementById('guide-track');
     const dotsTop = document.querySelectorAll('#guide-mobile-dots-top .gm-dot');
-    const dotsBot = document.querySelectorAll('#guide-mobile-dots-bottom .gm-dot');
     const swipeCue = document.getElementById('guide-swipe-cue');
     let hasSwiped = false;
     if (track) {
       track.addEventListener('scroll', () => {
         const idx = Math.round(track.scrollLeft / track.offsetWidth);
         dotsTop.forEach((d, i) => d.classList.toggle('active', i === idx));
-        dotsBot.forEach((d, i) => d.classList.toggle('active', i === idx));
         if (!hasSwiped && track.scrollLeft > 10) {
           hasSwiped = true;
           if (swipeCue) swipeCue.classList.add('hidden');
